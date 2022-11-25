@@ -4,13 +4,6 @@ import pandas as pd
 import time
 from PIL import Image     # 이미지 처리 라이브러리
 
-
-# from sklearn.model_selection import train_test_split
-# from sklearn.metrics import accuracy_score
-
-# from sklearn.linear_model import LinearRegression
-
-
 ########### function ###########
 def count_down(ts):
     with st.empty():
@@ -75,6 +68,7 @@ if 'file_name' not in st.session_state:
 
 ########### define ###########
 
+# file_name = 'titanic.csv'
 # url = f'https://raw.githubusercontent.com/skfkeh/regression/main/data/{file_name}'
 
 ########### define ###########
@@ -96,40 +90,22 @@ image = Image.open('img/Patrick.jpeg')
 st.image(image)
 
 btn_choice = st.radio("분석 알고리즘을 골라주세요",
-               ("Linear", "Logistic", "KNN", "NaiveBayes", "DesicionTree", "RandomForest"))
+               ("Logistic", "RandomForest", "XGBoost"))
 SearchBtn = st.button('Search')
 
 
 
-
-if btn_choice == 'Linear' and SearchBtn:
-    st.session_state['chk_strline'] = 'Linear'
     
 if btn_choice == 'Logistic' and SearchBtn:
     st.session_state['chk_strline'] = 'Logistic'
-    file_name = 'titanic.csv'
-    url = f'https://raw.githubusercontent.com/skfkeh/regression/main/data/{file_name}'
-
-    df = Logistic_algorithm(url)
-
-    x = df[df.drop(columns='Survived').columns]
-    y = df.Survived
     
-    tsize = 0.2
-    rstate = 100
-
-if btn_choice == 'KNN' and SearchBtn:
-    st.session_state['chk_strline'] = 'KNN'
-
-if btn_choice == 'NaiveBayes' and SearchBtn:
-    st.session_state['chk_strline'] = 'NaiveBayes'
-
-if btn_choice == 'DesicionTree' and SearchBtn:
-    st.session_state['chk_strline'] = 'DesicionTree'
+    
 
 if btn_choice == 'RandomForest' and SearchBtn:
     st.session_state['chk_strline'] = 'RandomForest'
 
+if btn_choice == 'RandomForest' and SearchBtn:
+    st.session_state['chk_strline'] = 'XGBoost'
 
 st.write(st.session_state['chk_strline'])
 
