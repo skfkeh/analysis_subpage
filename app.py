@@ -100,9 +100,9 @@ st.image(url, caption="Why So Serious??!")
 
 
 # btn_choice = st.radio("분석 알고리즘을 골라주세요", ("Logistic", "RandomForest", "XGBoost"))
-mul_choice = st.multiselect("분석 알고리즘을 골라주세요", ["Logistic", "RandomForest", "XGBoost"])
+choice = st.selectbox("분석 알고리즘을 골라주세요", ["Logistic", "RandomForest", "XGBoost"])
 
-if mul_choice == 'Logistic':
+if choice == 'Logistic':
     ts_number = st.slider("test_size를 설정해주세요", 0, 1)
     
     btn_chkbox_rs = st.checkbox("random_state 설정")
@@ -114,13 +114,13 @@ if mul_choice == 'Logistic':
 
 
     
-if mul_choice == 'Logistic' and SearchBtn:
+if choice == 'Logistic' and SearchBtn:
     st.session_state['chk_strline'] = 'Logistic'
 
-if mul_choice == 'RandomForest' and SearchBtn:
+if choice == 'RandomForest' and SearchBtn:
     st.session_state['chk_strline'] = 'RandomForest'
 
-if mul_choice == 'XGBoost' and SearchBtn:
+if choice == 'XGBoost' and SearchBtn:
     st.session_state['chk_strline'] = 'XGBoost'
 
 
