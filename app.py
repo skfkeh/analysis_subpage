@@ -7,47 +7,13 @@ from PIL import Image     # 이미지 처리 라이브러리
 ########### function ###########
 def count_down(ts):
     with st.empty():
-        input_time = 1*5
+        input_time = 1*3
         while input_time>=0:
             minutes, seconds = input_time//60, input_time%60
             st.metric("Countdown", f"{minutes:02d}:{seconds:02d}")
             time.sleep(1)
             input_time -= 1
         st.empty()
-
-        
-def Logistic_algorithm(url):
-    df_train = pd.read_csv(url, index_col=0)
-
-    #### 결측치 처리
-    ## 1. Embarked 처리
-    df_train.Embarked.fillna('S', inplace=True)
-
-    ## 2. Cabin, Ticket Drop 처리
-    df_train.drop(columns=['Cabin', 'Ticket'], inplace=True)
-    df_train['Title'] = df_train.Name.str.extract('([a-zA-Z]+)\.')
-
-    ## 3. Age 처리
-    # Name에서 호칭 정리
-    title_unique = df_train.Title.unique()
-    rarelist = []
-    for t in title_unique:
-      if list(df_train.Title).count(t) < 10:
-        rarelist.append(t)
-
-    # 나이 평균 정의
-    title_age_mean = df_train.groupby(['Title'])['Age'].mean()
-    for t in df_train.Title.unique():
-      df_train.loc[(df_train.Age.isnull()) & (df_train.Title == t), 'Age'] = title_age_mean[t]
-
-    # Name, Title 컬럼 Drop
-    df_train.drop(columns=['Name', 'Title'], inplace=True)
-
-
-    ## 4. Sex, Embarked - dummy 화
-    df_train_dummy = pd.get_dummies(df_train, columns=['Sex', 'Embarked'], drop_first=True)
-    
-    return df_train_dummy
 
 ########### function ###########
         
@@ -59,7 +25,10 @@ if 'chk_balloon' not in st.session_state:
 
 if 'chk_strline' not in st.session_state:
     st.session_state['chk_strline'] = ''
-    
+
+if 'choice' not in st.session_state:
+    st.session_state['choice'] = 'Logistic'
+
 if 'file_name' not in st.session_state:
     st.session_state['file_name'] = ''
     
@@ -94,6 +63,14 @@ url = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/00f3d481-97e5-4
 st.image(url, caption="Why So Serious??!")
 
 
+st.write("사용한 데이터 Download 하기")
+#st.download_button(label="Download",
+#                   data=excel,
+#                   file_name='Data_Train.xlsx'
+#                   mime='Resource/')
+
+
+
 
 
 
@@ -103,7 +80,9 @@ st.image(url, caption="Why So Serious??!")
 choice = st.selectbox("분석 알고리즘을 골라주세요", ["Logistic", "RandomForest", "XGBoost"])
 
 if choice == 'Logistic':
-    ts_number = st.slider("test_size를 설정해주세요", 0.00, 1.00, (0.25, 0.5, 0.75))
+    ts_number = st.slider(label="test_size를 설정해주세요",
+                          min_value=0.00, max_value=1.00,
+                          step=0.25, format="%f")
     st.write('Test_size : ', ts_number)
     
     btn_chkbox_rs = st.checkbox("random_state 설정")
