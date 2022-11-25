@@ -103,7 +103,8 @@ st.image(url, caption="Why So Serious??!")
 choice = st.selectbox("분석 알고리즘을 골라주세요", ["Logistic", "RandomForest", "XGBoost"])
 
 if choice == 'Logistic':
-    ts_number = st.slider("test_size를 설정해주세요", 0, 1)
+    ts_number = st.slider("test_size를 설정해주세요", 0.0, 1.0, (0.25, 0.5, 0.75))
+    st.write('Test_size : ', ts_number)
     
     btn_chkbox_rs = st.checkbox("random_state 설정")
     
