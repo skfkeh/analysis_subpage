@@ -100,7 +100,7 @@ st.image(url, caption="Why So Serious??!")
 
 
 # btn_choice = st.radio("분석 알고리즘을 골라주세요", ("Logistic", "RandomForest", "XGBoost"))
-mul_choice = st.multisellect("분석 알고리즘을 골라주세요", ["Logistic", "RandomForest", "XGBoost"])
+mul_choice = st.multiselect("분석 알고리즘을 골라주세요", ["Logistic", "RandomForest", "XGBoost"])
 
 if mul_choice == 'Logistic':
     ts_number = st.slider("test_size를 설정해주세요", 0, 1)
