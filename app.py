@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt 
 import time
 from PIL import Image     # 이미지 처리 라이브러리
 
@@ -132,12 +132,6 @@ if SearchBtn:
     x2 = np.random.randn(200)
     x3 = np.random.randn(200) + 2
     x4 = np.random.randn(200) + 5
-
-
-    fig = plt.figure() 
-    plt.plot([x0, x1, x2, x3, x4]) 
-
-    st.pyplot(fig)
     
     # Group data together
 #    hist_data = [x0, x1, x2, x3, x4]
