@@ -68,13 +68,13 @@ options = st.sidebar.radio('Pages', options=['Home', 'Data Statistics', 'Data He
 if uploaded_file:
     df = pd.read_excel(url)
 
-if options = 'Data Statistics':
+if options == 'Data Statistics':
     stats(df)
     
-elif options = 'Data Header':
+elif options == 'Data Header':
     data_header(df)
     
-elif options = 'Plot':
+elif options == 'Plot':
     plot(df)
     
     
