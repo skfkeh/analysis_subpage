@@ -27,7 +27,7 @@ if 'chk_strline' not in st.session_state:
     st.session_state['chk_strline'] = ''
 
 if 'choice' not in st.session_state:
-    st.session_state['choice'] = 'Logistic'
+    st.session_state['choice'] = ''
 
 if 'file_name' not in st.session_state:
     st.session_state['file_name'] = ''
@@ -37,8 +37,8 @@ if 'file_name' not in st.session_state:
 
 ########### define ###########
 
-# file_name = 'titanic.csv'
-# url = f'https://raw.githubusercontent.com/skfkeh/regression/main/data/{file_name}'
+file_name = 'titanic.csv'
+url = f'https://raw.githubusercontent.com/skfkeh/regression/main/data/{file_name}'
 
 ########### define ###########
     
@@ -59,15 +59,10 @@ if st.session_state['chk_balloon'] == False:
 
 st.title('내 항공료는 왜 비싼 것인가')
 
-url = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/00f3d481-97e5-4de9-bcf2-48c82b265793/d7uteu8-e50dde9e-b8af-4fea-ab31-b7748470dc8b.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzAwZjNkNDgxLTk3ZTUtNGRlOS1iY2YyLTQ4YzgyYjI2NTc5M1wvZDd1dGV1OC1lNTBkZGU5ZS1iOGFmLTRmZWEtYWIzMS1iNzc0ODQ3MGRjOGIuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.X7DaOWcJkNe2H8jjTNtybdRCV9p5u4H_yFaOk7kMbFg"
-st.image(url, caption="Why So Serious??!")
-
+jpg_url = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/00f3d481-97e5-4de9-bcf2-48c82b265793/d7uteu8-e50dde9e-b8af-4fea-ab31-b7748470dc8b.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzAwZjNkNDgxLTk3ZTUtNGRlOS1iY2YyLTQ4YzgyYjI2NTc5M1wvZDd1dGV1OC1lNTBkZGU5ZS1iOGFmLTRmZWEtYWIzMS1iNzc0ODQ3MGRjOGIuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.X7DaOWcJkNe2H8jjTNtybdRCV9p5u4H_yFaOk7kMbFg"
+st.image(jpg_url, caption="Why So Serious??!")
 
 st.write(f"사용한 데이터 URL : {url}")
-#st.download_button(label="Download",
-#                   data=excel,
-#                   file_name='Data_Train.xlsx'
-#                   mime='Resource/')
 
 
 
@@ -76,7 +71,6 @@ st.write(f"사용한 데이터 URL : {url}")
 
 
 
-# btn_choice = st.radio("분석 알고리즘을 골라주세요", ("Logistic", "RandomForest", "XGBoost"))
 choice = st.selectbox("분석 알고리즘을 골라주세요", ["Logistic", "RandomForest", "XGBoost"])
 
 if choice == 'Logistic':
@@ -89,8 +83,8 @@ if choice == 'Logistic':
     
     if btn_chkbox_rs:
         rs_number = st.slider("random_state 설정",
-                              min_value=1, max_value=200,
-                             step=50, format="%d")
+                              min_value=0, max_value=200,
+                              step=50, format="%d")
 
 
 
