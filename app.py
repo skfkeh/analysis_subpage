@@ -72,7 +72,24 @@ st.write(f"사용한 데이터 URL : {url}")
 
 
 st.write("분석 알고리즘을 골라주세요")
-choice = st.selectbox(["Logistic", "RandomForest", "XGBoost"])
+# choice = st.selectbox(["Logistic", "RandomForest", "XGBoost"])
+
+tab_Log, tab_RF, tab_XGB = st.tabs(["Logistic", "RandomForest", "XGBoost"])
+
+with tab_Log:
+   st.header("Logistic")
+   st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+
+with tab_RF:
+   st.header("RandomForest")
+   st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+
+with tab_XGB:
+   st.header("XGBoost")
+   st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+
+
+
 
 if choice == 'Logistic':
     ts_number = st.slider(label="test_size를 설정해주세요",
