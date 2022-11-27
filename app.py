@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# import plotly.figure_factory as ff
+import plotly.figure_factory as ff
 # import matplotlib.pyplot as plt 
 
 import time
@@ -86,9 +86,6 @@ st.write(f"사용한 데이터 URL : {url}")
 
 
 
-c = st.empty()
-st.wrtie("test")
-c.write("test2")
 
 st.write("분석 알고리즘을 골라주세요")
 
@@ -104,9 +101,7 @@ with tab_Log:
    ts_number = col1.slider(label="test_size를 설정해주세요",
                           min_value=0.00, max_value=1.00,
                           step=0.10, format="%f")
-    
-#   btn_chkbox_rs = st.checkbox("random_state 설정")
-    
+
    rs_number = col2.slider(label="random_state 설정",
                               min_value=0, max_value=200,
                               step=50, format="%d")
@@ -149,40 +144,40 @@ if SearchBtn:
     x4 = np.random.randn(200) + 5
     
     # Group data together
-#    hist_data = [x0, x1, x2, x3, x4]
+    hist_data = [x0, x1, x2, x3, x4]
 
-#    group_labels = ['Group 1', 'Group 2', 'Group 3']
+    group_labels = ['Group 1', 'Group 2', 'Group 3']
 
     # Create distplot with custom bin_size
-#    fig = ff.create_distplot(
-#            hist_data, group_labels, bin_size=[.1, .25, .5])
+    fig = ff.create_distplot(
+           hist_data, group_labels, bin_size=[.1, .25, .5])
 
     # Plot!
-#    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, use_container_width=True)
 
 #####
 
 
 
 
-btn_chkbox = st.checkbox("WebCam")
-st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
+# btn_chkbox = st.checkbox("WebCam")
+# st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
 
 
-if btn_chkbox:
-    img_file_buffer = st.camera_input("Take a picture")
+# if btn_chkbox:
+#     img_file_buffer = st.camera_input("Take a picture")
 
-    if img_file_buffer is not None:
-        # To read image file buffer as a 3D uint8 tensor with PyTorch:
-        bytes_data = img_file_buffer.getvalue()
-        torch_img = torch.ops.image.decode_image(
-            torch.from_numpy(np.frombuffer(bytes_data, np.uint8)), 3
-        )
+#     if img_file_buffer is not None:
+#         # To read image file buffer as a 3D uint8 tensor with PyTorch:
+#         bytes_data = img_file_buffer.getvalue()
+#         torch_img = torch.ops.image.decode_image(
+#             torch.from_numpy(np.frombuffer(bytes_data, np.uint8)), 3
+#         )
 
-        # Check the type of torch_img:
-        # Should output: <class 'torch.Tensor'>
-        st.write(type(torch_img))
+#         # Check the type of torch_img:
+#         # Should output: <class 'torch.Tensor'>
+#         st.write(type(torch_img))
 
-        # Check the shape of torch_img:
-        # Should output shape: torch.Size([channels, height, width])
-        st.write(torch_img.shape)
+#         # Check the shape of torch_img:
+#         # Should output shape: torch.Size([channels, height, width])
+#         st.write(torch_img.shape)
