@@ -63,7 +63,7 @@ if st.session_state['chk_balloon'] == False:
 
 
 options = st.sidebar.radio('Pages', options=['Home', 'Data Statistics', 'Data Header'
-, 'Plot])
+, 'Plot'])
 
 if uploaded_file:
     df = pd.read_excel(url)
