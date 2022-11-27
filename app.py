@@ -70,7 +70,7 @@ st.write(f"사용한 데이터 URL : {url}")
 
 c = st.empty()
 st.wrtie("test")
-c.write("test2"
+c.write("test2")
 
 st.write("분석 알고리즘을 골라주세요")
 
