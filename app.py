@@ -68,10 +68,9 @@ st.write(f"사용한 데이터 URL : {url}")
 
 
 
-
-
-
-choice = st.selectbox("분석 알고리즘을 골라주세요", ["Logistic", "RandomForest", "XGBoost"])
+col1, col2 = st.columns(2)
+col1.write("분석 알고리즘을 골라주세요")
+choice = col2.selectbox(["Logistic", "RandomForest", "XGBoost"])
 
 if choice == 'Logistic':
     ts_number = st.slider(label="test_size를 설정해주세요",
