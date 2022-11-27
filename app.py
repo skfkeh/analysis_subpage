@@ -70,8 +70,6 @@ st.write(f"사용한 데이터 URL : {url}")
 
 
 
-# col1, col2 = st.columns(2)
-
 
 st.write("분석 알고리즘을 골라주세요")
 
@@ -79,21 +77,20 @@ tab_Log, tab_RF, tab_XGB = st.tabs(["Logistic", "RandomForest", "XGBoost"])
 
 #### Tab1
 with tab_Log:
+   col1, col2 = st.columns(2)
+   
    st.header("Logistic")
    st.image("https://github.com/skfkeh/newthing/blob/main/img/Patrick.jpeg?raw=true", width=200)
    
-   ts_number = st.slider(label="test_size를 설정해주세요",
+   ts_number = col1.slider(label="test_size를 설정해주세요",
                           min_value=0.00, max_value=1.00,
                           step=0.10, format="%f")
     
-   btn_chkbox_rs = st.checkbox("random_state 설정")
+#   btn_chkbox_rs = st.checkbox("random_state 설정")
     
-   if btn_chkbox_rs:
-        rs_number = st.slider(label="random_state 설정",
+   rs_number = col2.slider(label="random_state 설정",
                               min_value=0, max_value=200,
                               step=50, format="%d")
-   else :
-        rs_text = False
         
    # st.write(f'Test_size : {ts_number}      Random_state : {rs_text}{rs_number}')
 
