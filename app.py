@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-import plotly.figure_factory as ff
+# import plotly.figure_factory as ff
 # import matplotlib.pyplot as plt 
 
 import time
@@ -60,6 +60,24 @@ if st.session_state['chk_balloon'] == False:
 ################################
 #####       UI Start       #####
 ################################
+
+
+options = st.sidebar.radio('Pages', options=['Home', 'Data Statistics', 'Data Header'
+, 'Plot])
+
+if uploaded_file:
+    df = pd.read_excel(url)
+
+if options = 'Data Statistics':
+    stats(df)
+    
+elif options = 'Data Header':
+    data_header(df)
+    
+elif options = 'Plot':
+    plot(df)
+    
+    
 
 st.title('내 항공료는 왜 비싼 것인가')
 
