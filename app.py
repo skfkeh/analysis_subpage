@@ -2,7 +2,10 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+
+import plotly.figure_factory as ff
 # import matplotlib.pyplot as plt 
+
 import time
 from PIL import Image     # 이미지 처리 라이브러리
 
@@ -121,7 +124,6 @@ SearchBtn = st.button('Search')
 
 
 #####
-# import plotly.figure_factory as ff
 
 if SearchBtn:
     # Add histogram data
