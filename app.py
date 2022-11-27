@@ -108,14 +108,14 @@ with tab_XGB:
 ###############
 ###############
 
-if choice == 'Logistic' and SearchBtn:
-    st.session_state['chk_strline'] = 'Logistic'
+# if choice == 'Logistic' and SearchBtn:
+#     st.session_state['chk_strline'] = 'Logistic'
 
-if choice == 'RandomForest' and SearchBtn:
-    st.session_state['chk_strline'] = 'RandomForest'
+# if choice == 'RandomForest' and SearchBtn:
+#     st.session_state['chk_strline'] = 'RandomForest'
 
-if choice == 'XGBoost' and SearchBtn:
-    st.session_state['chk_strline'] = 'XGBoost'
+# if choice == 'XGBoost' and SearchBtn:
+#    st.session_state['chk_strline'] = 'XGBoost'
 
 
 SearchBtn = st.button('Search')
