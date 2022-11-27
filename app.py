@@ -92,7 +92,7 @@ with tab_Log:
                               step=50, format="%d")
    else :
         rs_text = False
-   st.write(f'Test_size : {ts_number}      Random_state : {rs_text}{rs_number}')
+#   st.write(f'Test_size : {ts_number}      Random_state : {rs_text}{rs_number}')
 
 with tab_RF:
    st.header("RandomForest")
