@@ -63,7 +63,7 @@ url = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/00f3d481-97e5-4
 st.image(url, caption="Why So Serious??!")
 
 
-st.write("사용한 데이터 Download 하기")
+st.write(f"사용한 데이터 URL : {url}")
 #st.download_button(label="Download",
 #                   data=excel,
 #                   file_name='Data_Train.xlsx'
@@ -82,13 +82,15 @@ choice = st.selectbox("분석 알고리즘을 골라주세요", ["Logistic", "Ra
 if choice == 'Logistic':
     ts_number = st.slider(label="test_size를 설정해주세요",
                           min_value=0.00, max_value=1.00,
-                          step=0.25, format="%f")
+                          step=0.20, format="%f")
     st.write('Test_size : ', ts_number)
     
     btn_chkbox_rs = st.checkbox("random_state 설정")
     
     if btn_chkbox_rs:
-        rs_number = st.slider("random_state 설정", 1, 200)
+        rs_number = st.slider("random_state 설정",
+                              min_value=1, max_value=200,
+                             step=50, format="%d")
 
 
 
