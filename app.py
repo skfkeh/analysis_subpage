@@ -72,7 +72,6 @@ st.write(f"사용한 데이터 URL : {url}")
 
 
 st.write("분석 알고리즘을 골라주세요")
-# choice = st.selectbox(["Logistic", "RandomForest", "XGBoost"])
 
 tab_Log, tab_RF, tab_XGB = st.tabs(["Logistic", "RandomForest", "XGBoost"])
 
@@ -107,6 +106,25 @@ with tab_XGB:
 ###############
 ###############
 ###############
+
+
+placeholder = st.empty()
+
+# Replace the placeholder with some text:
+placeholder.text("Hello")
+
+# Replace the text with a chart:
+placeholder.line_chart({"data": [1, 5, 2, 6]})
+
+# Replace the chart with several elements:
+with placeholder.container():
+    st.write("This is one element")
+    st.write("This is another")
+
+# Clear all those elements:
+placeholder.empty()
+
+    
 
 # if choice == 'Logistic' and SearchBtn:
 #     st.session_state['chk_strline'] = 'Logistic'
