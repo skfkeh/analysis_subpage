@@ -62,18 +62,15 @@ if st.session_state['chk_balloon'] == False:
 ################################
 
 
-options = st.sidebar.radio('Pages', options=['Home', 'Data Statistics', 'Data Header'
-, 'Plot'])
+options = st.sidebar.radio('Pages', options=['Home','Data preprocessing','Plot'])
 
-if uploaded_file:
-    df = pd.read_excel(url)
+#if uploaded_file:
+#    df = pd.read_excel(url)
 
-if options == 'Data Statistics':
-    stats(df)
-    
-elif options == 'Data Header':
-    data_header(df)
-    
+if options == 'Home':
+    home(df)
+elif options == 'Data preprocessing':
+    preprocessing(df)
 elif options == 'Plot':
     plot(df)
     
