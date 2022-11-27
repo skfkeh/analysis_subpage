@@ -79,6 +79,20 @@ tab_Log, tab_RF, tab_XGB = st.tabs(["Logistic", "RandomForest", "XGBoost"])
 with tab_Log:
    st.header("Logistic")
    st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+   
+   ts_number = st.slider(label="test_size를 설정해주세요",
+                          min_value=0.00, max_value=1.00,
+                          step=0.10, format="%f")
+    
+   btn_chkbox_rs = st.checkbox("random_state 설정")
+    
+   if btn_chkbox_rs:
+        rs_number = st.slider(label="random_state 설정",
+                              min_value=0, max_value=200,
+                              step=50, format="%d")
+   else :
+        rs_text = False
+   st.write(f'Test_size : {ts_number}      Random_state : {rs_text}{rs_number}')
 
 with tab_RF:
    st.header("RandomForest")
@@ -90,24 +104,10 @@ with tab_XGB:
 
 
 
+###############
+###############
+###############
 
-if choice == 'Logistic':
-    ts_number = st.slider(label="test_size를 설정해주세요",
-                          min_value=0.00, max_value=1.00,
-                          step=0.10, format="%f")
-    
-    btn_chkbox_rs = st.checkbox("random_state 설정")
-    
-    if btn_chkbox_rs:
-        rs_number = st.slider(label="random_state 설정",
-                              min_value=0, max_value=200,
-                              step=50, format="%d")
-    else :
-        rs_text = False
-st.write(f'Test_size : {ts_number}      Random_state : {rs_text}{rs_number}')
-
-
-    
 if choice == 'Logistic' and SearchBtn:
     st.session_state['chk_strline'] = 'Logistic'
 
