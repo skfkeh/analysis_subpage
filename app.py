@@ -76,17 +76,17 @@ choice = st.selectbox("분석 알고리즘을 골라주세요", ["Logistic", "Ra
 if choice == 'Logistic':
     ts_number = st.slider(label="test_size를 설정해주세요",
                           min_value=0.00, max_value=1.00,
-                          step=0.20, format="%f")
-    st.write('Test_size : ', ts_number)
+                          step=0.10, format="%f")
     
     btn_chkbox_rs = st.checkbox("random_state 설정")
     
     if btn_chkbox_rs:
-        rs_number = st.slider("random_state 설정",
+        rs_number = st.slider(label="random_state 설정",
                               min_value=0, max_value=200,
                               step=50, format="%d")
-
-
+    else :
+        rs_text = False
+st.write(f'Test_size : {ts_number}      Random_state : {rs_text}{rs_number}')
 
 
     
