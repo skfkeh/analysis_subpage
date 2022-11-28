@@ -131,7 +131,8 @@ if st.session_state['chk_balloon'] == False:
     st.session_state['chk_balloon'] = True
 
 
-options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 시각화(plotly)'])
+options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','0
+데이터 전처리 과정','03. 시각화(plotly)'])
 
 # if uploaded_file:
 #    df = pd.read_excel(url)
@@ -154,7 +155,7 @@ elif options == '02. 데이터 전처리 과정':
     st.dataframe(df.head())
     
     st.write("2. Route Drop 처리")
-    code_Route = 'df.drop('Route', axis=1, inplace=True)'
+    code_Route = '''df.drop('Route', axis=1, inplace=True)'''
     
     st.write("3. Duration 컬럼을 '시간'과 '분' 단위로 분할 후 Duration 컬럼 drop")
     code_Dep = '''df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
