@@ -364,7 +364,8 @@ elif options == '03. 알고리즘 적용':
         st.subheader('RMSE 비교')
         train_relation_square = model.score(X_train, y_train)
         test_relation_square = model.score(X_test, y_test)
-        st.write(f' train 결정계수 : {train_relation_square}, test 결정계수 : {test_relation_square}')
+        st.write(f'Train 결정계수 : {train_relation_square}')
+        st.write(f'Test 결정계수 : {test_relation_square}')
         
         st.subheader('시각화 부분')
         SearchBtn_DT = st.button('Search')
