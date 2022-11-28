@@ -374,20 +374,15 @@ elif options == '03. 시각화(plotly)':
         
         if predict_button:
             col1, col2 = st.columns(2)
-            col1.write(f'Train_set : {model.score(X_train, y_train)}')
-            col2.write(f'Test_set : {model.score(X_test, y_test)}')
+            col1.write(f'Train_set : ')
+            col2.write(f'Test_set : ')
             
-            st.markdown('||train|test|')
-            st.markdown('---')
-            st.markdown(f'|rmse|{mean_squared_error(y_train, train_pred, squared=False)}|{mean_squared_error(y_test, test_pred)}|')
-            
-#             col1, col2, col3, col4 = st.columns(4)
-#             col1.write('train_pred')
-# #            st.dataframe(train_pred)
-#             col3.write('test_pred')
-# #            st.dataframe(test_pred)
-            
-            
+            df = pd.DataFrame(
+                [['Set', model.score(X_train, y_train), model.score(X_test, y_test)],
+                 ['RMSE', mean_squared_error(y_train, train_pred, squared=False), mean_squared_error(y_test, test_pred)]]
+                columns=(['', 'Test', 'Train'])
+            )
+
             
 
             st.write('')
