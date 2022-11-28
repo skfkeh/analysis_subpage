@@ -145,13 +145,14 @@ if options == '01. Home':
     st.write(f"사용한 데이터 URL : {url}")
 
 elif options == '02. 데이터 전처리 과정':
+    st.image('https://www.rd.com/wp-content/uploads/2022/04/GettyImages-1140602972-e1651249657746.jpg')
     df = pd.read_csv(url)
     
     st.write("df.head()")
     st.dataframe(df.head())
     
-    st.write("df.head()")
-    st.dataframe(df.info())
+    st.write("df.info()")
+    st.write(df.info())
     
     pre_data = preprocessing(df)
     
