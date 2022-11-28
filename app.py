@@ -149,14 +149,17 @@ if options == '01. Home':
 elif options == '02. 데이터 전처리 과정':
     st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/plane_img.png?raw=true')
     df = pd.read_csv(url)
-    
+
+### 1. df.head()로 데이터 확인
     st.write("1. df.head()로 데이터 확인")
     st.dataframe(df.head())
-    
+
+### 2. Route Drop 처리
     st.write("2. Route Drop 처리")
     code_Route = '''df.drop('Route', axis=1, inplace=True)'''
     st.code(code_Route, language='python')
-    
+
+### 3. Duration 전처리
     st.write("3. Duration 컬럼을 '시간'과 '분' 단위로 분할 후 Duration 컬럼 drop")
     code_Dep = '''#Duration 컬럼을 '시간'과 '분' 단위로 분할
 df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
@@ -186,13 +189,53 @@ df['Duration_total'] = df.Duration_hour+df.Duration_min'''
     
     st.dataframe(df.head())
     
+#### 4. Airline 전처리
+    st.write("4. Airline 전처리")
+    code_airline = '''air_count = df.Airline.value_counts().index
+airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
+df.Airline = df.Airline.replace(airlist, 'Others')
+
+for t in range(len(air_count)):
+    df.loc[df.Airline == air_count[t], 'Air_col'] = t'''
+    st.code(code_airline, language='python')
+    
+    air_count = df.Airline.value_counts().index
+    airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
+    df.Airline = df.Airline.replace(airlist, 'Others')
+
+    for t in range(len(air_count)):
+        df.loc[df.Airline == air_count[t], 'Air_col'] = t
+    df.drop(columns=['Airline'],inplace=True)
+    
+#### 5. Additional_Info 전처리
+    st.write("5. Additional_Info 전처리")
+    code_addition = '''add_count = df.Additional_Info.value_counts().index
+additional_thing = [l for l in add_count if list(df.Additional_Info).count(l) < 20]
+df.Additional_Info = df.Additional_Info.replace(additional_thing, 'Others')
+
+add_count = df.Additional_Info.value_counts().index
+for t in range(len(add_count)):
+    df.loc[df.Additional_Info == add_count[t], 'Add_col'] = t'''
+    st.code(code_addition, language='python')
+    
+    add_count = df.Additional_Info.value_counts().index
+    additional_thing = [l for l in add_count if list(df.Additional_Info).count(l) < 20]
+    df.Additional_Info = df.Additional_Info.replace(additional_thing, 'Others')
+
+    add_count = df.Additional_Info.value_counts().index
+    for t in range(len(add_count)):
+        df.loc[df.Additional_Info == add_count[t], 'Add_col'] = t
+        
+    st.dataframe(df(head())    
+    
+        
     
     code_airlist = '''airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
 df.Airline = df.Airline.replace(airlist, 'Others')'''
     
-    st.code(code_airlist, language='python')
+#    st.code(code_airlist, language='python')
     
-    pre_data = preprocessing(df)
+#    pre_data = preprocessing(df)
     
 elif options == '03. 시각화(plotly)':
     st.write("분석 알고리즘을 골라주세요")
