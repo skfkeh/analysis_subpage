@@ -393,7 +393,6 @@ elif options == '03. 알고리즘 적용':
         test_pred_rf = model_rf.predict(X_test)
 
         predict_button_rf = st.button('예측')
-        
 #         if predict_button_rf:
 #             st.write(f'Train-set : {model_rf.score(X_train, y_train)}')
 #             st.write(f'Test-set : {model_rf.score(X_test, y_test)}')
