@@ -311,6 +311,8 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     df = preprocess_Dummy(df)
     st.dataframe(df.head())
     
+    st.image('https://github.com/skfkeh/newthing/blob/main/img/plane_landing.png?raw=true')
+    
 elif options == '03. 시각화(plotly)':
     st.write("분석 알고리즘을 골라주세요")
 
