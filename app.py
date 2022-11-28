@@ -372,25 +372,26 @@ elif options == '03. 시각화(plotly)':
 
         predict_button = st.button('예측')
         
-        if predict_button:            
-            df_pred = pd.DataFrame(
-                [['Set', model.score(X_train, y_train), model.score(X_test, y_test)],
-                 ['RMSE', mean_squared_error(y_train, train_pred, squared=False), mean_squared_error(y_test, test_pred)]],
-                columns=(['', 'Test', 'Train'])
-            )
+        if predict_button:        
+            st.write(model.score(X_train, y_train), model.score(X_test, y_test))
+#             df_pred = pd.DataFrame(
+#                 [['Set', model.score(X_train, y_train), model.score(X_test, y_test)],
+#                  ['RMSE', mean_squared_error(y_train, train_pred, squared=False), mean_squared_error(y_test, test_pred)]],
+#                 columns=(['', 'Train', 'Test'])
+#             )
             
-            # CSS to inject contained in a string
-            hide_table_row_index = """
-                        <style>
-                        thead tr th:first-child {display:none}
-                        tbody th {display:none}
-                        </style>
-                        """
+#             # CSS to inject contained in a string
+#             hide_table_row_index = """
+#                         <style>
+#                         thead tr th:first-child {display:none}
+#                         tbody th {display:none}
+#                         </style>
+#                         """
 
-            # Inject CSS with Markdown
-            st.markdown(hide_table_row_index, unsafe_allow_html=True)
-            st.table(df_pred)
-            st.write('')
+#             # Inject CSS with Markdown
+#             st.markdown(hide_table_row_index, unsafe_allow_html=True)
+#             st.table(df_pred)
+#             st.write('')
 
 
         # 훈련 모델 시각화
