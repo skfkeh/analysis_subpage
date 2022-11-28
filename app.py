@@ -389,7 +389,7 @@ elif options == '03. 시각화(plotly)':
 
             # Inject CSS with Markdown
             st.markdown(hide_table_row_index, unsafe_allow_html=True)
-
+            st.table(df_pred)
             st.write('')
 
 
