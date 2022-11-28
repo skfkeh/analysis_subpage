@@ -393,6 +393,7 @@ elif options == '03. 시각화(plotly)':
             fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',name='Predict')) # mode='lines+markers'
             fig.update_layout(title='<b>actual과 predict 비교')
             st.plotly_chart(fig)
+
     #### Tab3
     with tab_XGB:
        st.header("XGBoost")
