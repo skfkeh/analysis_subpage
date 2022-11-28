@@ -161,7 +161,7 @@ url = f'https://raw.githubusercontent.com/skfkeh/newthing/main/{file_name}'
 #    st.session_state['chk_balloon'] = True
 
 
-options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 시각화(plotly)'])
+options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 알고리즘 적용', '04. 우수 모델 선정'])
 
 # if uploaded_file:
 #    df = pd.read_excel(url)
@@ -320,7 +320,7 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     
     st.image('https://github.com/skfkeh/newthing/blob/main/img/plane_landing.png?raw=true')
     
-elif options == '03. 시각화(plotly)':
+elif options == '03. 알고리즘 적용':
     st.title("분석 알고리즘에 따른 predict 값 ")
 
     tab_De, tab_RF, tab_XGB = st.tabs(["DecisionTree", "RandomForest", "XGBoost"])
@@ -341,7 +341,7 @@ elif options == '03. 시각화(plotly)':
                                   step=50, format="%d")
 
        # st.write(f'Test_size : {ts_number}      Random_state : {rs_text}{rs_number}')
-
+        
     #### Tab2
     with tab_RF:
         st.header("RandomForest")
@@ -420,3 +420,7 @@ elif options == '03. 시각화(plotly)':
     with tab_XGB:
        st.header("XGBoost")
        st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+        
+        
+elif options == '04. 우수 모델 선정':
+    st.title('우수 모델')
