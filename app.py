@@ -104,6 +104,7 @@ def preprocess_Drop(df):
                      'Date_of_journey_DT',
                      'Additional_Info',
                      'weekday'],inplace=True)
+    return df
 
 ### 9.범주형 변수 처리
 def preprocess_Dummy(df):
