@@ -370,6 +370,7 @@ elif options == '03. 알고리즘 적용':
 #         CheckBox_dt = st.checkbox('plotly 활성화')
 
 #         if CheckBox_dt:
+        # 시각화 해보기
         fig_dt = make_subplots(rows=1, cols=1, shared_xaxes=True)
         fig_dt.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_dt'))
         fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict_dt'))
@@ -415,7 +416,7 @@ elif options == '03. 알고리즘 적용':
 #         CheckBox_rf = st.checkbox('plotly 활성화')
 
 #         if CheckBox_rf:
-            # 시각화 해보기
+        # 시각화 해보기
         fig_rf = make_subplots(rows=1, cols=1, shared_xaxes=True)
         fig_rf.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_rf'))
         fig_rf.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers', name='Predict_rf')) # mode='lines+markers'
