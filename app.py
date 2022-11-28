@@ -16,6 +16,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+import random       # 각 plotly 그래프의 key값을 적용하기 위한 import
 
 ########### function ###########
 ## 카운트 다운
@@ -138,6 +139,7 @@ if 'file_name' not in st.session_state:
 ########### define ###########
 file_name = 'Data_Train.csv'
 url = f'https://raw.githubusercontent.com/skfkeh/newthing/main/{file_name}'
+keys = random.sample(range(1000, 9999), 3)
 ########### define ###########
 
 
@@ -372,7 +374,7 @@ elif options == '03. 알고리즘 적용':
             fig_dt.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_dt'))
             fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict_dt'))
             fig_dt.update_layout(title='<b>actual과 predict 비교_dt')
-            st.plotly_chart(fig_dt)
+            st.plotly_chart(fig_dt, key = keys[0])
         
     #### Tab2
     with tab_RF:
@@ -418,7 +420,7 @@ elif options == '03. 알고리즘 적용':
             fig_rf.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_rf'))
             fig_rf.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers', name='Predict_rf')) # mode='lines+markers'
             fig_rf.update_layout(title='<b>actual과 predict 비교_rf')
-            st.plotly_chart(fig_rf)
+            st.plotly_chart(fig_rf, key = keys[1])
 
     #### Tab3
     with tab_XGB:
