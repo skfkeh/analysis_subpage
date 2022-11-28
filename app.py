@@ -289,7 +289,7 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     
 #    df = preprocess_Dummy(df)
     st.write('')
-    st.write(---)
+    st.markdown('---')
     st.write('')
     
     st.header('전처리 완료')
