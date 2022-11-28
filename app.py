@@ -377,7 +377,10 @@ elif options == '03. 시각화(plotly)':
                 [['Set', model.score(X_train, y_train), model.score(X_test, y_test)],
                  ['RMSE', mean_squared_error(y_train, train_pred, squared=False), mean_squared_error(y_test, test_pred)]],
                 columns=(['', 'Test', 'Train'])
-            ).style.hide_index()
+            )
+            
+            styler = df.style.hide_index().format(subset=['Test'], decimal=',', precision=2).bar(subset=['Test'], align="mid")
+            st.write(styler.to_html(), unsafe_allow_html=True)
 
             st.table(df_pred)
 
