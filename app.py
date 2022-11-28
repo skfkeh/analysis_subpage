@@ -188,6 +188,7 @@ elif options == '02. 데이터 전처리 과정':
     st.write('')
     df = preprocess_Route(df)
 
+
     ### 3. Duration 전처리
     st.header("3. Duration 전처리")
     code_Dep = '''#Duration 컬럼을 '시간'과 '분' 단위로 분할
@@ -208,6 +209,7 @@ df['Duration_total'] = df.Duration_hour+df.Duration_min'''
     st.dataframe(df.head())
     st.write('')
 
+
     #### 4. Airline 전처리
     st.header("4. Airline 전처리")
     code_airline = '''air_count = df.Airline.value_counts().index
@@ -222,13 +224,60 @@ for t in range(len(air_count)):
     df = preprocess_Airline(df)
     st.write('')
     
+    
     #### 5. Total_Stops 전처리
     st.header("5. Total_Stops 전처리")
-      
+    
+    code_Stop = '''def handle_stops(x):
+    if x == 'non-stop': return 0
+    return int(x.split()[0])
+
+df.Total_Stops = df.Total_Stops.apply(handle_stops)'''
+    st.code(code_Stop, language='python')
+    df = preprocess_Stops(df)
+    st.write('')
     
     
+    #### 6. Date_of_Journey 전처리
+    st.header("6. Date_of_Journey 전처리")
+    
+    code_Date = '''df['Date_of_journey_DT'] = pd.to_datetime(df['Date_of_Journey'])
+df['weekday'] = pd.to_datetime(df['Date_of_journey_DT']).dt.weekday
+df['weekday_name'] = pd.to_datetime(df['Date_of_journey_DT']).dt.day_name()'''
+
+    st.code(code_Date, language='python')
+    df = preprocess_Date(df)
+    st.write('')
     
     
+    ### 7. Dep_Time 데이터 전처리
+    st.header("7. Dep_Time 전처리")
+    code_Dep = '''df.Dep_Time = df.Dep_Time.astype(str)
+df['Dep_hour'] = df.Dep_Time.str.extract('([0-9]+)\:')
+df.drop(columns=['Dep_Time'],inplace=True)'''
+    df = preprocess_Dep_Time(df)    
+    st.code(code_Dep, language='python')
+    st.write('')
+    
+    
+    ### 8. 불필요 컬럼 drop
+    st.header("8. 불필요 컬럼 drop")
+    st.write('분석에 불필요한 컬럼을 Drop 처리한다.')
+    st.write('대상 : Date_of_Journey,Source,Destination,Date_of_journey_DT,Additional_Info,weekday')
+    df = preprocess_Drop(df)
+    st.write('')
+    
+    
+    ### 9.범주형 변수 처리
+    st.header("9.범주형 변수 처리")
+    st.write('정리된 column 중 object로 남아있는 column들을 dummy 처리한다.')
+    code_Dummy = '''df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'],drop_first=True)
+df.head()'''
+    df = preprocess_Dummy(df)
+    st.dataframe(df)
+    
+    
+    st.wrtie('데이터 전처리 완료')
 elif options == '03. 시각화(plotly)':
     st.write("분석 알고리즘을 골라주세요")
 
