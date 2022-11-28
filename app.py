@@ -348,9 +348,9 @@ elif options == '03. 알고리즘 적용':
         train_pred = model.predict(X_train) 
         test_pred = model.predict(X_test)
         
-        predict_button = st.button('예측')
+        predict_button_DT = st.button('예측')
         
-        if predict_button:        
+        if predict_button_DT:        
             st.write(f'Train-set : {model.score(X_train, y_train)}')
             st.write(f'Test-set : {model.score(X_test, y_test)}')
 
@@ -405,9 +405,9 @@ elif options == '03. 알고리즘 적용':
         train_pred = model.predict(X_train) 
         test_pred = model.predict(X_test)
 
-        predict_button = st.button('예측')
+        predict_button_RF = st.button('예측')
         
-        if predict_button:        
+        if predict_button_RF:
             st.write(f'Train-set : {model.score(X_train, y_train)}')
             st.write(f'Test-set : {model.score(X_test, y_test)}')
             
