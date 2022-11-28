@@ -382,8 +382,8 @@ elif options == '03. 알고리즘 적용':
         model_pkl_path_rf = f"{os.path.dirname(os.path.abspath(__file__))}/randomforest.pkl"
         model_rf = joblib.load(model_pkl_path_rf)
 
-#         # 파라미터 변경해가며 예측
-#         st.subheader('예측하기')
+        # 파라미터 변경해가며 예측
+        st.subheader('예측하기')
 #         s1_col, s2_col, s3_col = st.columns(3)
 #         s1_col.selectbox('choose n_estimators',[200,500,800,1000])
 #         s2_col.selectbox('choose max_dpth',[5,9,12,20])
@@ -392,7 +392,7 @@ elif options == '03. 알고리즘 적용':
         train_pred_rf = model_rf.predict(X_train) 
         test_pred_rf = model_rf.predict(X_test)
 
-#         predict_button_rf = st.button('예측')
+        predict_button_rf = st.button('예측')
         
 #         if predict_button_rf:
 #             st.write(f'Train-set : {model_rf.score(X_train, y_train)}')
