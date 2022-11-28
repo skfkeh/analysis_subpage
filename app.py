@@ -373,10 +373,10 @@ elif options == '03. 시각화(plotly)':
         
         if predict_button:
             st.write(f'Train_set : {model.score(X_train, y_train)}')
-            st.wrtie(f'Test_set : {model.score(X_test, y_test)}')
+            st.write(f'Test_set : {model.score(X_test, y_test)}')
             
-            st.wrtie(f'train_pred " {train_pred}')
-            st.wrtie(f'test_pred " {test_pred}')
+            st.write(f'train_pred " {train_pred}')
+            st.write(f'test_pred " {test_pred}')
 
         # 훈련 모델 시각화
         st.subheader('모델 훈련이 잘 되었는지 시각화')
