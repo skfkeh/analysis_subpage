@@ -227,13 +227,7 @@ for t in range(len(add_count)):
         df.loc[df.Additional_Info == add_count[t], 'Add_col'] = t
         
     st.dataframe(df(head())
-    
-        
-    
-#    code_airlist = '''airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
-#df.Airline = df.Airline.replace(airlist, 'Others')'''
-    
-#    st.code(code_airlist, language='python')
+
     
 #    pre_data = preprocessing(df)
     
