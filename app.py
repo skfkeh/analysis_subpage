@@ -167,22 +167,7 @@ elif options == '02. 데이터 전처리 과정':
     df.Duration_hour = df.Duration_hour*60
     df['Duration_total'] = df.Duration_hour+df.Duration_min
     '''
-    st.code(code_Dep, language='python')
-    
-    df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
-    df['Duration_hour'] = df.Duration.str.extract('(\d+)h')
-    df['Duration_min'] = df.Duration.str.extract('(\d+)m').fillna(0)
-    df.drop('Duration', axis=1, inplace=True)
-    df.drop(index=6474,inplace=True)
-
-    df.Duration_hour = df.Duration_hour.astype('int64')
-    df.Duration_min = df.Duration_min.astype('int64')
-    df.Duration_hour = df.Duration_hour*60
-    df['Duration_total'] = df.Duration_hour+df.Duration_min
-    df.drop(columns=['Duration_hour','Duration_min','Arrival_Time'],inplace=True)
-
-    st.dataframe(df.head())
-    
+    st.code(code_Dep, language='python')    
     
     code_airlist = '''airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
     df.Airline = df.Airline.replace(airlist, 'Others')
