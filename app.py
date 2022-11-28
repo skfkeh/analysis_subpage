@@ -222,22 +222,26 @@ df.Airline = df.Airline.replace(airlist, 'Others')
 for t in range(len(air_count)):
     df.loc[df.Airline == air_count[t], 'Air_col'] = t'''
     st.code(code_airline, language='python')
-    df = preprocess_Airline(df)
-    
+    df = preprocess_Airline(df)    
     st.write('')
     
     
     #### 5. Additional_Info 전처리
-    st.write("5. Additional_Info 전처리")
-    code_addition = '''add_count = df.Additional_Info.value_counts().index
+    st.header("5. Additional_Info 전처리")
+    code_addition = '''# 20 보다 적은 수의 Additional_Info Others 로 변환
+add_count = df.Additional_Info.value_counts().index
 additional_thing = [l for l in add_count if list(df.Additional_Info).count(l) < 20]
 df.Additional_Info = df.Additional_Info.replace(additional_thing, 'Others')
 
+# 건 수가 많은 순서로 변수로 지정
 add_count = df.Additional_Info.value_counts().index
+
+# Add_col 컬럼에 인덱스 번호로 넣기
 for t in range(len(add_count)):
     df.loc[df.Additional_Info == add_count[t], 'Add_col'] = t'''
     st.code(code_addition, language='python')    
     df = preprocess_Additional(df)
+    st.write('')
 
     
     #### 6. Total_Stops 전처리
@@ -245,7 +249,7 @@ for t in range(len(add_count)):
     
     code_Stop = '''def handle_stops(x):
     if x == 'non-stop': return 0
-    return int(x.split()[0])
+    return int(x.split()[0])`
 
 df.Total_Stops = df.Total_Stops.apply(handle_stops)'''
     st.code(code_Stop, language='python')
