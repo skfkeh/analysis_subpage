@@ -23,11 +23,14 @@ def count_down(ts):
         st.empty()
 
 ## 데이터 전처리
-def preprocessing(df):
-    ### 1. Route Drop 처리
-    df.drop('Route', axis=1, inplace=True)
 
-    ### 2. Duration 컬럼을 '시간'과 '분' 단위로 분할 후 Duration 컬럼 drop
+### 1. Route Drop 처리
+def preprocess_Route(df):
+    df.drop('Route', axis=1, inplace=True)
+    return df
+
+### 2. Duration 전처리
+def preprocess_Duration(df):
     df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
     df['Duration_hour'] = df.Duration.str.extract('(\d+)h')
     df['Duration_min'] = df.Duration.str.extract('(\d+)m').fillna(0)
@@ -39,8 +42,11 @@ def preprocessing(df):
     df.Duration_hour = df.Duration_hour*60
     df['Duration_total'] = df.Duration_hour+df.Duration_min
     df.drop(columns=['Duration_hour','Duration_min','Arrival_Time'],inplace=True)
+    
+    return df
 
-    ### 3. Airline 전처리
+### 3. Airline 전처리
+def preprocess_Airline(df):
     air_count = df.Airline.value_counts().index
     airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
     df.Airline = df.Airline.replace(airlist, 'Others')
@@ -48,8 +54,11 @@ def preprocessing(df):
     for t in range(len(air_count)):
         df.loc[df.Airline == air_count[t], 'Air_col'] = t
     df.drop(columns=['Airline'],inplace=True)
+    
+    return df
 
-    ### 4. Additional_Info 전처리
+### 4. Additional_Info 전처리
+def preprocess_Additional(df):
     add_count = df.Additional_Info.value_counts().index
     additional_thing = [l for l in add_count if list(df.Additional_Info).count(l) < 20]
     df.Additional_Info = df.Additional_Info.replace(additional_thing, 'Others')
@@ -57,8 +66,11 @@ def preprocessing(df):
     add_count = df.Additional_Info.value_counts().index
     for t in range(len(add_count)):
         df.loc[df.Additional_Info == add_count[t], 'Add_col'] = t
+        
+    return df
 
-    ### 5. Total_Stops 전처리
+### 5. Total_Stops 전처리
+def preprocess_Stops(df):
     df.loc[df.Total_Stops.isna(),'Total_Stops'] = '1 stop'
 
     def handle_stops(x):
@@ -67,27 +79,37 @@ def preprocessing(df):
 
     df.Total_Stops = df.Total_Stops.apply(handle_stops)
 
-    ### 6. Date_of_Journey 전처리
+    return df
+    
+### 6. Date_of_Journey 전처리
+def preprocess_Date(df):
     df['Date_of_journey_DT'] = pd.to_datetime(df['Date_of_Journey'])
     df['weekday'] = pd.to_datetime(df['Date_of_journey_DT']).dt.weekday
     df['weekday_name'] = pd.to_datetime(df['Date_of_journey_DT']).dt.day_name()
+    
+    return df
 
-    ### 7. Dep_Time 데이터 전처리
+### 7. Dep_Time 데이터 전처리
+def preprocess_Dep_Time(df):
     df.Dep_Time = df.Dep_Time.astype(str)
     df['Dep_hour'] = df.Dep_Time.str.extract('([0-9]+)\:')
     df.drop(columns=['Dep_Time'],inplace=True)
+    
+    return df
 
-    ### 8. 불필요 컬럼 drop
+### 8. 불필요 컬럼 drop
+def preprocess_Drop(df):
     df.drop(columns=['Date_of_Journey',
                      'Source','Destination',
                      'Date_of_journey_DT',
                      'Additional_Info',
                      'weekday'],inplace=True)
 
-    ### 9.범주형 변수 처리
+### 9.범주형 변수 처리
+def preprocess_Dummy(df):
     df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'],drop_first=True)
-    
     return df
+    
 ########### function ###########
         
     
@@ -122,13 +144,13 @@ url = f'https://raw.githubusercontent.com/skfkeh/newthing/main/{file_name}'
 #####       UI Start       #####
 ################################
 
-if st.session_state['chk_balloon'] == False:
-    count_down(5)
-    with st.spinner(text="Please wait..."):
-        time.sleep(1)
+#if st.session_state['chk_balloon'] == False:
+#    count_down(5)
+#    with st.spinner(text="Please wait..."):
+#        time.sleep(1)
 
-    st.balloons()
-    st.session_state['chk_balloon'] = True
+#    st.balloons()
+#    st.session_state['chk_balloon'] = True
 
 
 options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 시각화(plotly)'])
@@ -154,12 +176,17 @@ elif options == '02. 데이터 전처리 과정':
     st.header("1. df.head()로 데이터 확인")
     st.dataframe(df.head())
     st.write('')
+    
 
     ### 2. Route Drop 처리
     st.header("2. Route Drop 처리")
+    st.write('Total_Stops 와 Route가 관련 있는 컬럼인가')
+    st.write(' => stop 수에 맞춰 Route가 늘어나는 것 확인')
+    st.write('가장 먼저 Route를 drop 처리 => Total_Stops 라는 컬럼으로 활용')
     code_Route = '''df.drop('Route', axis=1, inplace=True)'''
     st.code(code_Route, language='python')
     st.write('')
+    df = preprocess_Route(df)
 
     ### 3. Duration 전처리
     st.header("3. Duration 전처리")
@@ -176,33 +203,27 @@ df.Duration_hour = df.Duration_hour*60
 df['Duration_total'] = df.Duration_hour+df.Duration_min'''
     st.code(code_Dep, language='python')
     
-    df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
-    df['Duration_hour'] = df.Duration.str.extract('(\d+)h')
-    df['Duration_min'] = df.Duration.str.extract('(\d+)m').fillna(0)
-    df.drop('Duration', axis=1, inplace=True)
-    df.drop(index=6474,inplace=True)
-    
-    df.Duration_hour = df.Duration_hour.astype('int64')
-    df.Duration_min = df.Duration_min.astype('int64')
-    df.Duration_hour = df.Duration_hour*60
-    df['Duration_total'] = df.Duration_hour+df.Duration_min
+    df = preprocess_Duration(df)
 
-    df.drop(columns=['Duration_hour','Duration_min','Arrival_Time'],inplace=True)
-    
     st.dataframe(df.head())
     st.write('')
 
     #### 4. Airline 전처리
     st.header("4. Airline 전처리")
     code_airline = '''air_count = df.Airline.value_counts().index
+# 200 보다 적은 수의 airline은 Others 로 변환
 airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
 df.Airline = df.Airline.replace(airlist, 'Others')
 
+# Air_col : Airline을 번호로 분류
 for t in range(len(air_count)):
     df.loc[df.Airline == air_count[t], 'Air_col'] = t'''
     st.code(code_airline, language='python')
+    df = preprocess_Airline(df)
     st.write('')
-
+    
+    #### 5. Total_Stops 전처리
+    st.header("5. Total_Stops 전처리")
       
     
     
