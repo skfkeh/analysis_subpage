@@ -321,7 +321,7 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     st.image('https://github.com/skfkeh/newthing/blob/main/img/plane_landing.png?raw=true')
     
 elif options == '03. 시각화(plotly)':
-    st.title("분석 알고리즘을 골라주세요")
+    st.title("알고리즘에 따른 predict 값 ")
 
     tab_De, tab_RF, tab_XGB = st.tabs(["DecisionTree", "RandomForest", "XGBoost"])
 
