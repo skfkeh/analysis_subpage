@@ -343,9 +343,38 @@ elif options == '03. 알고리즘 적용':
         model_pkl_path = f"{os.path.dirname(os.path.abspath(__file__))}/decisionTree.pkl"
         model = joblib.load(model_pkl_path)
         
+        st.subheader('예측하기')
+        
         train_pred = model.predict(X_train) 
         test_pred = model.predict(X_test)
         
+        predict_button = st.button('예측')
+        
+        if predict_button:        
+            st.write(f'Train-set : {model.score(X_train, y_train)}')
+            st.write(f'Test-set : {model.score(X_test, y_test)}')
+
+        # 훈련 모델 시각화
+        st.subheader('모델 훈련이 잘 되었는지 시각화')
+        r1_col, r2_col = st.columns(2)
+        r1_col.image('https://github.com/skfkeh/newthing/blob/main/img/first_pred_dt.png?raw=true',caption='초기 파라미터 값 그래프')
+        r2_col.image('https://github.com/skfkeh/newthing/blob/main/img/optim_pred_dt.png?raw=true',caption='최적의 파라미터 적용 그래프')
+
+        # 기본값일 때 결정계수
+        st.subheader('RMSE 비교')
+        train_relation_square = model.score(X_train, y_train)
+        test_relation_square = model.score(X_test, y_test)
+        st.write(f' train 결정계수 : {train_relation_square}, test 결정계수 : {test_relation_square}')
+        
+        st.subheader('시각화 부분')
+        SearchBtn_DT = st.button('Search')
+
+        if SearchBtn_DT:
+            fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
+            fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
+            fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',name='Predict')) # mode='lines+markers'
+            fig.update_layout(title='<b>actual과 predict 비교')
+            st.plotly_chart(fig)
         
     #### Tab2
     with tab_RF:
