@@ -272,9 +272,9 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     
     col1.write('- Date_of_Journey')
     col2.write('- Source')
-    col3.write('- Destination')
+    col3.write('- Additional_Info')
     col1.write('- Date_of_journey_DT')
-    col2.write('- Additional_Info')
+    col2.write('- Destination')
     col3.write('- weekday')
     df = preprocess_Drop(df)
     st.dataframe(df.head())
@@ -287,7 +287,7 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     code_Dummy = "df = pd.get_dummies(df,columns=['weekday_name','Add_col','Air_col'],drop_first=True)"
     st.code(code_Dummy, language='python')
     
-    df = preprocess_Dummy(df)
+#    df = preprocess_Dummy(df)
     st.write('')
     st.write('')
     
