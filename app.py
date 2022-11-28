@@ -188,28 +188,7 @@ elif options == '02. 데이터 전처리 과정':
     df.drop(columns=['Duration_hour','Duration_min','Arrival_Time'],inplace=True)
     
     st.dataframe(df.head())
-    
-    #### 4. Airline 전처리
-    st.write("4. Airline 전처리")
-    code_airline = '''  air_count = df.Airline.value_counts().index
-    airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
-    df.Airline = df.Airline.replace(airlist, 'Others')
 
-    for t in range(len(air_count)):
-        df.loc[df.Airline == air_count[t], 'Air_col'] = t'''
-    st.code(code_airline, language='python')
-    
-    air_count = df.Airline.value_counts().index
-    airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
-    df.Airline = df.Airline.replace(airlist, 'Others')
-
-    for t in range(len(air_count)):
-        df.loc[df.Airline == air_count[t], 'Air_col'] = t
-    df.drop(columns=['Airline'],inplace=True)
-    
-
-        
-    st.dataframe(df(head())
     
     
 elif options == '03. 시각화(plotly)':
