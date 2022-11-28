@@ -377,9 +377,9 @@ elif options == '03. 시각화(plotly)':
             col2.write(f'Test_set : {model.score(X_test, y_test)}')
             
             st.write('train_pred')            
-            st.dataframe(train_pred.head(10))
+            st.dataframe(train_pred)
             st.write('test_pred')
-            st.dataframe(test_pred.head(10))
+            st.dataframe(test_pred)
             st.write('')
 
 
