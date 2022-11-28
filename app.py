@@ -153,11 +153,13 @@ elif options == '02. 데이터 전처리 과정':
     ### 1. df.head()로 데이터 확인
     st.header("1. df.head()로 데이터 확인")
     st.dataframe(df.head())
+    st.write('')
 
     ### 2. Route Drop 처리
     st.header("2. Route Drop 처리")
     code_Route = '''df.drop('Route', axis=1, inplace=True)'''
     st.code(code_Route, language='python')
+    st.write('')
 
     ### 3. Duration 전처리
     st.header("3. Duration 전처리")
@@ -188,6 +190,7 @@ df['Duration_total'] = df.Duration_hour+df.Duration_min'''
     df.drop(columns=['Duration_hour','Duration_min','Arrival_Time'],inplace=True)
     
     st.dataframe(df.head())
+    st.write('')
 
     #### 4. Airline 전처리
     st.header("4. Airline 전처리")
@@ -198,6 +201,7 @@ df.Airline = df.Airline.replace(airlist, 'Others')
 for t in range(len(air_count)):
     df.loc[df.Airline == air_count[t], 'Air_col'] = t'''
     st.code(code_airline, language='python')
+    st.write('')
 
       
     
