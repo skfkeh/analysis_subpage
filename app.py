@@ -161,17 +161,17 @@ elif options == '02. 데이터 전처리 과정':
 
     ### 3. Duration 전처리
     st.write("3. Duration 컬럼을 '시간'과 '분' 단위로 분할 후 Duration 컬럼 drop")
-    code_Dep = '''  #Duration 컬럼을 '시간'과 '분' 단위로 분할
-    df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
-    df['Duration_hour'] = df.Duration.str.extract('(\d+)h')
-    df['Duration_min'] = df.Duration.str.extract('(\d+)m').fillna(0)
+    code_Dep = '''#Duration 컬럼을 '시간'과 '분' 단위로 분할
+df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
+df['Duration_hour'] = df.Duration.str.extract('(\d+)h')
+df['Duration_min'] = df.Duration.str.extract('(\d+)m').fillna(0)
 
-    # 계산을 위해 str -> int64 로 변경하고 Duration_hour을 분으로 변경
-    # 최종적으로 Duration_total 컬럼으로 내린다
-    df.Duration_hour = df.Duration_hour.astype('int64')
-    df.Duration_min = df.Duration_min.astype('int64')
-    df.Duration_hour = df.Duration_hour*60
-    df['Duration_total'] = df.Duration_hour+df.Duration_min'''
+# 계산을 위해 str -> int64 로 변경하고 Duration_hour을 분으로 변경
+# 최종적으로 Duration_total 컬럼으로 내린다
+df.Duration_hour = df.Duration_hour.astype('int64')
+df.Duration_min = df.Duration_min.astype('int64')
+df.Duration_hour = df.Duration_hour*60
+df['Duration_total'] = df.Duration_hour+df.Duration_min'''
     st.code(code_Dep, language='python')
     
     df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
