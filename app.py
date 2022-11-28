@@ -155,6 +155,7 @@ elif options == '02. 데이터 전처리 과정':
     
     st.write("2. Route Drop 처리")
     code_Route = '''df.drop('Route', axis=1, inplace=True)'''
+    st.code(code_Route, langauge='python')
     
     st.write("3. Duration 컬럼을 '시간'과 '분' 단위로 분할 후 Duration 컬럼 drop")
     code_Dep = '''df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
