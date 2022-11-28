@@ -365,9 +365,9 @@ elif options == '03. 알고리즘 적용':
         st.write(f'Test 결정계수 : {test_relation_square_dt}')
         
         st.subheader('시각화 부분')
-        SearchBtn_dt = st.button('Search')
+        checkBox_dt = st.checkbox('Search')
 
-        if SearchBtn_dt:
+        if checkBox_dt:
             fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
             fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
             fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',name='Predict')) # mode='lines+markers'
