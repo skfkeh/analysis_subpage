@@ -274,10 +274,9 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     code_Dummy = '''df = pd.get_dummies(df,columns=['weekday_name','Add_col','Air_col'],drop_first=True) df.head()'''
     st.code(code_Dummy, language='python')
 #    df = preprocess_Dummy(df)
-    st.dataframe(df)
-    
-    
+#    st.dataframe(df)
     st.wrtie('데이터 전처리 완료')
+    
 elif options == '03. 시각화(plotly)':
     st.write("분석 알고리즘을 골라주세요")
 
