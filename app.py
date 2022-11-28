@@ -291,7 +291,8 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     st.write('')
     
     st.header('전처리 완료')
-    st.dataframe(preprocess_Dummy(df).head())
+    df = preprocess_Dummy(df)
+    st.dataframe(df.head())
     
 elif options == '03. 시각화(plotly)':
     st.write("분석 알고리즘을 골라주세요")
