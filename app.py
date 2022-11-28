@@ -379,10 +379,16 @@ elif options == '03. 시각화(plotly)':
                 columns=(['', 'Test', 'Train'])
             )
             
-            styler = df.style.hide_index().format(subset=['Test'], decimal=',', precision=2).bar(subset=['Test'], align="mid")
-            st.write(styler.to_html(), unsafe_allow_html=True)
+            # CSS to inject contained in a string
+            hide_table_row_index = """
+                        <style>
+                        thead tr th:first-child {display:none}
+                        tbody th {display:none}
+                        </style>
+                        """
 
-            st.table(df_pred)
+            # Inject CSS with Markdown
+            st.markdown(hide_table_row_index, unsafe_allow_html=True)
 
             st.write('')
 
