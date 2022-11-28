@@ -198,16 +198,10 @@ df.Airline = df.Airline.replace(airlist, 'Others')
 for t in range(len(air_count)):
     df.loc[df.Airline == air_count[t], 'Air_col'] = t'''
     st.code(code_airline, language='python')
-    
-    air_count = df.Airline.value_counts().index
-    airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
-    df.Airline = df.Airline.replace(airlist, 'Others')
 
-    for t in range(len(air_count)):
-        df.loc[df.Airline == air_count[t], 'Air_col'] = t
-    df.drop(columns=['Airline'],inplace=True)
-        
-    st.dataframe(df(head())
+      
+    
+    
     
     
 elif options == '03. 시각화(plotly)':
