@@ -77,7 +77,7 @@ st.image(jpg_url, caption="Why So Serious??!")
 
 st.write(f"사용한 데이터 URL : {url}")
 
-if options == 'Data preprocessing':
+if options == '02. 데이터 전처리 과정':
     st.write("분석 알고리즘을 골라주세요")
 
     tab_Log, tab_RF, tab_XGB = st.tabs(["Logistic", "RandomForest", "XGBoost"])
@@ -109,7 +109,7 @@ if options == 'Data preprocessing':
        st.header("XGBoost")
        st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
 
-elif options == 'Plot':
+elif options == '03. 시각화(plotly)':
     SearchBtn = st.button('Search')
     
     if SearchBtn:
