@@ -145,10 +145,10 @@ if options == '01. Home':
     st.write(f"사용한 데이터 URL : {url}")
 
 elif options == '02. 데이터 전처리 과정':
-    st.image('https://www.rd.com/wp-content/uploads/2022/04/GettyImages-1140602972-e1651249657746.jpg').resize((600, 200))
+    st.image('https://www.rd.com/wp-content/uploads/2022/04/GettyImages-1140602972-e1651249657746.jpg')
     df = pd.read_csv(url)
     
-    st.write("1. 확인을 위한 \'df.head()\'")
+    st.write("1. 확인을 위한 df.head()")
     st.dataframe(df.head())
     
     
