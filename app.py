@@ -345,11 +345,11 @@ elif options == '03. 알고리즘 적용':
         train_pred_dt = model_dt.predict(X_train) 
         test_pred_dt = model_dt.predict(X_test)
         
-        predict_button_dt = st.button('예측')
+#         predict_button_dt = st.button('예측')
         
-        if predict_button_dt:        
-            st.write(f'Train-set : {model_dt.score(X_train, y_train)}')
-            st.write(f'Test-set : {model_dt.score(X_test, y_test)}')
+#         if predict_button_dt:        
+        st.write(f'Train-set : {model_dt.score(X_train, y_train)}')
+        st.write(f'Test-set : {model_dt.score(X_test, y_test)}')
 
         # 훈련 모델 시각화
         st.subheader('모델 훈련이 잘 되었는지 시각화')
@@ -392,10 +392,10 @@ elif options == '03. 알고리즘 적용':
         train_pred_rf = model_rf.predict(X_train) 
         test_pred_rf = model_rf.predict(X_test)
 
-        predict_button_rf = st.button('예측')
+#         predict_button_rf = st.button('예측')
 #         if predict_button_rf:
-#             st.write(f'Train-set : {model_rf.score(X_train, y_train)}')
-#             st.write(f'Test-set : {model_rf.score(X_test, y_test)}')
+        st.write(f'Train-set : {model_rf.score(X_train, y_train)}')
+        st.write(f'Test-set : {model_rf.score(X_test, y_test)}')
             
         # 훈련 모델 시각화
         st.subheader('모델 훈련이 잘 되었는지 시각화')
