@@ -368,11 +368,11 @@ elif options == '03. 알고리즘 적용':
         CheckBox_dt = st.checkbox('plotly 활성화')
 
         if CheckBox_dt:
-            fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
-            fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
-            fig.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict')) # mode='lines+markers'
-            fig.update_layout(title='<b>actual과 predict 비교')
-            st.plotly_chart(fig)
+            fig_dt = make_subplots(rows=1, cols=1, shared_xaxes=True)
+            fig_dt.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
+            fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict')) # mode='lines+markers'
+            fig_dt.update_layout(title='<b>actual과 predict 비교')
+            st.plotly_chart(fig_dt)
         
     #### Tab2
     with tab_RF:
@@ -414,12 +414,12 @@ elif options == '03. 알고리즘 적용':
 
         if CheckBox_rf:
             # 시각화 해보기
-            fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
-            fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
-            fig.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers',
+            fig_rf = make_subplots(rows=1, cols=1, shared_xaxes=True)
+            fig_rf.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
+            fig_rf.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers',
                         name='Predict')) # mode='lines+markers'
-            fig.update_layout(title='<b>actual과 predict 비교')
-            st.plotly_chart(fig)
+            fig_rf.update_layout(title='<b>actual과 predict 비교')
+            st.plotly_chart(fig_rf)
 
     #### Tab3
     with tab_XGB:
