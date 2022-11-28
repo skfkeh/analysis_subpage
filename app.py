@@ -347,32 +347,32 @@ elif options == '03. 알고리즘 적용':
         
         predict_button_dt = st.button('예측')
         
-#         if predict_button_dt:        
-#             st.write(f'Train-set : {model_dt.score(X_train, y_train)}')
-#             st.write(f'Test-set : {model_dt.score(X_test, y_test)}')
+        if predict_button_dt:        
+            st.write(f'Train-set : {model_dt.score(X_train, y_train)}')
+            st.write(f'Test-set : {model_dt.score(X_test, y_test)}')
 
-#         # 훈련 모델 시각화
-#         st.subheader('모델 훈련이 잘 되었는지 시각화')
-#         r1_col, r2_col = st.columns(2)
-#         r1_col.image('https://github.com/skfkeh/newthing/blob/main/img/first_pred_dt.png?raw=true',caption='초기 파라미터 값 그래프')
-#         r2_col.image('https://github.com/skfkeh/newthing/blob/main/img/optim_pred_dt.png?raw=true',caption='최적의 파라미터 적용 그래프')
+        # 훈련 모델 시각화
+        st.subheader('모델 훈련이 잘 되었는지 시각화')
+        r1_col, r2_col = st.columns(2)
+        r1_col.image('https://github.com/skfkeh/newthing/blob/main/img/first_pred_dt.png?raw=true',caption='초기 파라미터 값 그래프')
+        r2_col.image('https://github.com/skfkeh/newthing/blob/main/img/optim_pred_dt.png?raw=true',caption='최적의 파라미터 적용 그래프')
 
-#         # 기본값일 때 결정계수
-#         st.subheader('RMSE 비교')
-#         train_relation_square_dt = model_dt.score(X_train, y_train)
-#         test_relation_square_dt = model_dt.score(X_test, y_test)
-#         st.write(f'Train 결정계수 : {train_relation_square_dt}')
-#         st.write(f'Test 결정계수 : {test_relation_square_dt}')
+        # 기본값일 때 결정계수
+        st.subheader('RMSE 비교')
+        train_relation_square_dt = model_dt.score(X_train, y_train)
+        test_relation_square_dt = model_dt.score(X_test, y_test)
+        st.write(f'Train 결정계수 : {train_relation_square_dt}')
+        st.write(f'Test 결정계수 : {test_relation_square_dt}')
         
-#         st.subheader('시각화 부분')
-#         SearchBtn_dt = st.button('Search')
+        st.subheader('시각화 부분')
+        SearchBtn_dt = st.button('Search')
 
-#         if SearchBtn_dt:
-#             fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
-#             fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
-#             fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',name='Predict')) # mode='lines+markers'
-#             fig.update_layout(title='<b>actual과 predict 비교')
-#             st.plotly_chart(fig)
+        if SearchBtn_dt:
+            fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
+            fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
+            fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',name='Predict')) # mode='lines+markers'
+            fig.update_layout(title='<b>actual과 predict 비교')
+            st.plotly_chart(fig)
         
     #### Tab2
     with tab_RF:
@@ -392,7 +392,7 @@ elif options == '03. 알고리즘 적용':
         train_pred_rf = model_rf.predict(X_train) 
         test_pred_rf = model_rf.predict(X_test)
 
-        predict_button_rf = st.button('예측')
+#         predict_button_rf = st.button('예측')
         
 #         if predict_button_rf:
 #             st.write(f'Train-set : {model_rf.score(X_train, y_train)}')
