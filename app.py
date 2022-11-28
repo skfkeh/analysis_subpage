@@ -284,7 +284,7 @@ df['Dep_hour'] = df.Dep_Time.str.extract('([0-9]+)\:')
 df.drop(columns=['Dep_Time'],inplace=True)'''
     df = preprocess_Dep_Time(df)    
     st.code(code_Dep, language='python')
-    st.dataframe(df.head()) 
+    st.dataframe(df.head())
     st.write('')
     
     
@@ -327,20 +327,25 @@ elif options == '03. 알고리즘 적용':
 
     #### Tab1
     with tab_De:
-       col1, col2 = st.columns(2)
-
-       st.header("DecisionTree")
-       st.image("https://github.com/skfkeh/newthing/blob/main/img/Patrick.jpeg?raw=true", width=200)
-
-       ts_number = col1.slider(label="test_size를 설정해주세요",
-                              min_value=0.00, max_value=1.00,
-                              step=0.10, format="%f")
-
-       rs_number = col2.slider(label="random_state 설정",
-                                  min_value=0, max_value=200,
-                                  step=50, format="%d")
-
-       # st.write(f'Test_size : {ts_number}      Random_state : {rs_text}{rs_number}')
+        st.header("DecisionTree")
+        
+        data_path = f"{os.path.dirname(os.path.abspath(__file__))}/data.csv"
+        data = pd.read_csv(data_path)
+        df = pd.DataFrame(data)
+        df.drop('Unnamed: 0',axis=1,inplace=True)
+        # 데이터 전처리
+        
+        X = df.drop('Price', axis=1)
+        y = df.Price
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=100)
+        
+        # score 와 mse 비교
+        model_pkl_path = f"{os.path.dirname(os.path.abspath(__file__))}/decisionTree.pkl"
+        model = joblib.load(model_pkl_path)
+        
+        train_pred = model.predict(X_train) 
+        test_pred = model.predict(X_test)
+        
         
     #### Tab2
     with tab_RF:
@@ -375,26 +380,7 @@ elif options == '03. 알고리즘 적용':
         if predict_button:        
             st.write(f'Train-set : {model.score(X_train, y_train)}')
             st.write(f'Test-set : {model.score(X_test, y_test)}')
-#             df_pred = pd.DataFrame(
-#                 [['Set', model.score(X_train, y_train), model.score(X_test, y_test)],
-#                  ['RMSE', mean_squared_error(y_train, train_pred, squared=False), mean_squared_error(y_test, test_pred)]],
-#                 columns=(['', 'Train', 'Test'])
-#             )
             
-#             # CSS to inject contained in a string
-#             hide_table_row_index = """
-#                         <style>
-#                         thead tr th:first-child {display:none}
-#                         tbody th {display:none}
-#                         </style>
-#                         """
-
-#             # Inject CSS with Markdown
-#             st.markdown(hide_table_row_index, unsafe_allow_html=True)
-#             st.table(df_pred)
-#             st.write('')
-
-
         # 훈련 모델 시각화
         st.subheader('모델 훈련이 잘 되었는지 시각화')
         r1_col, r2_col = st.columns(2)
