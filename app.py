@@ -223,7 +223,6 @@ for t in range(len(air_count)):
     st.code(code_airline, language='python')
     df = preprocess_Airline(df)
     
-    st.dataframe(df.head())
     st.write('')
     
     
@@ -237,6 +236,7 @@ for t in range(len(air_count)):
 df.Total_Stops = df.Total_Stops.apply(handle_stops)'''
     st.code(code_Stop, language='python')
     df = preprocess_Stops(df)
+    st.dataframe(df.head())
     st.write('')
     
     
@@ -259,6 +259,7 @@ df['Dep_hour'] = df.Dep_Time.str.extract('([0-9]+)\:')
 df.drop(columns=['Dep_Time'],inplace=True)'''
     df = preprocess_Dep_Time(df)    
     st.code(code_Dep, language='python')
+    st.dataframe(df.head())
     st.write('')
     
     
