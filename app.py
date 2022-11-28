@@ -140,14 +140,14 @@ if options == '01. Home':
     st.title('내 항공료는 왜 비싼 것인가')
     st.header('다음 항목은 사이드 메뉴를 확인해 주세요.')
 
-    jpg_url = "https://github.com/skfkeh/newthing/blob/main/img/why.png?raw=true"
+    jpg_url = "https://github.com/skfkeh/MachineLearning/blob/main/img/why.png?raw=true"
     # st.set_page_config(layout="wide")
     st.image(jpg_url, caption="Why So Serious??!")
 
     st.write(f"사용한 데이터 URL : {url}")
 
 elif options == '02. 데이터 전처리 과정':
-    st.image('https://github.com/skfkeh/newthing/blob/main/img/plane_img.png?raw=true')
+    st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/plane_img.png?raw=true')
     df = pd.read_csv(url)
     
     st.write("1. df.head()로 데이터 확인")
