@@ -351,6 +351,7 @@ elif options == '03. 시각화(plotly)':
         df = pd.DataFrame(data)
         df.drop('Unnamed: 0',axis=1,inplace=True)
         # 데이터 전처리
+        
         X = df.drop('Price', axis=1)
         y = df.Price
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=100)
@@ -376,10 +377,19 @@ elif options == '03. 시각화(plotly)':
             col1.write(f'Train_set : {model.score(X_train, y_train)}')
             col2.write(f'Test_set : {model.score(X_test, y_test)}')
             
-            st.write('train_pred')            
-            st.dataframe(train_pred)
-            st.write('test_pred')
-            st.dataframe(test_pred)
+            col1, col2, col3, col4 = st.columns(4)
+            col1.write('train_pred')
+#            st.dataframe(train_pred)
+            col3.write('test_pred')
+#            st.dataframe(test_pred)
+            
+            col1.write('train_rmse')
+            col2.write(mean_squared_error(y_train, train_pred, squared=False))
+            col3.write('test_rmse')
+            col4.write(mean_squared_error(y_test, test_pred))
+            
+            
+
             st.write('')
 
 
