@@ -377,7 +377,7 @@ elif options == '03. 시각화(plotly)':
                 [['Set', model.score(X_train, y_train), model.score(X_test, y_test)],
                  ['RMSE', mean_squared_error(y_train, train_pred, squared=False), mean_squared_error(y_test, test_pred)]],
                 columns=(['', 'Test', 'Train'])
-            ).set_index('column', inplace=True)
+            ).style.hide_index()
 
             st.table(df_pred)
 
