@@ -108,7 +108,7 @@ def preprocess_Drop(df):
 
 ### 9.범주형 변수 처리
 def preprocess_Dummy(df):
-    df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'],drop_first=True)
+    df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'], drop_first=True)
     return df
     
 ########### function ###########
@@ -287,9 +287,11 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     code_Dummy = "df = pd.get_dummies(df,columns=['weekday_name','Add_col','Air_col'],drop_first=True)"
     st.code(code_Dummy, language='python')
     df = preprocess_Dummy(df)
-    st.dataframe(df)
+    st.write('')
+    st.write('')
     
-    st.title('전처리 완료')
+    st.header('전처리 완료')
+    st.dataframe(df)
     
 elif options == '03. 시각화(plotly)':
     st.write("분석 알고리즘을 골라주세요")
