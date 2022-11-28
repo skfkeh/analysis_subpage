@@ -372,14 +372,14 @@ elif options == '03. 시각화(plotly)':
         predict_button = st.button('예측')
         
         if predict_button:
-            st.write(f'Train_set : {model.score(X_train, y_train)}')
-            st.write(f'Test_set : {model.score(X_test, y_test)}')
-            
             col1, col2 = st.columns(2)
-            col1.write('train_pred')            
-            col1.dataframe(train_pred.head(10))
-            col2.write('test_pred')
-            col2.dataframe(test_pred.head(10))
+            col1.write(f'Train_set : {model.score(X_train, y_train)}')
+            col2.write(f'Test_set : {model.score(X_test, y_test)}')
+            
+            st.write('train_pred')            
+            st.dataframe(train_pred.head(10))
+            st.write('test_pred')
+            st.dataframe(test_pred.head(10))
             st.write('')
 
 
