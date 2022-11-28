@@ -64,8 +64,8 @@ if st.session_state['chk_balloon'] == False:
 
 options = st.sidebar.radio('Pages', options=['Home','Data preprocessing','Plot'])
 
-if uploaded_file:
-   df = pd.read_excel(url)
+# if uploaded_file:
+#    df = pd.read_excel(url)
 
 if options == 'Home':
     st.title('내 항공료는 왜 비싼 것인가')
