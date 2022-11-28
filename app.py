@@ -410,12 +410,14 @@ elif options == '03. 알고리즘 적용':
         st.write(f'test 결정계수 : {test_relation_square_rf}')
 
         st.subheader('시각화 부분')
-        checkBox_rf = st.checkbox('plotly 활성화')
+        SearchBtn_rf = st.button('plotly 활성화')
 
-        if checkBox_rf:
+        if SearchBtn_rf:
+            # 시각화 해보기
             fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
             fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
-            fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',name='Predict')) # mode='lines+markers'
+            fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',
+                        name='Predict')) # mode='lines+markers'
             fig.update_layout(title='<b>actual과 predict 비교')
             st.plotly_chart(fig)
 
