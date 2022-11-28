@@ -259,15 +259,22 @@ df['Dep_hour'] = df.Dep_Time.str.extract('([0-9]+)\:')
 df.drop(columns=['Dep_Time'],inplace=True)'''
     df = preprocess_Dep_Time(df)    
     st.code(code_Dep, language='python')
-    st.dataframe(df.head())
+    st.dataframe(df.head()) 
     st.write('')
     
     
     ### 8. 불필요 컬럼 drop
     st.header("8. 불필요 컬럼 drop")
     st.write('분석에 불필요한 컬럼을 Drop 처리한다.')
-    st.write('대상 : Date_of_Journey,Source,Destination,Date_of_journey_DT,Additional_Info,weekday')
+    st.header('대상')
+    st.write('- Date_of_Journey')
+    st.write('- Source')
+    st.write('- Destination')
+    st.write('- Date_of_journey_DT')
+    st.write('- Additional_Info')
+    st.write('- weekday')
     df = preprocess_Drop(df)
+    st.dataframe(df.head()) 
     st.write('')
     
     
