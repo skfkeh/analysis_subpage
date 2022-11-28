@@ -385,40 +385,16 @@ elif options == '03. 시각화(plotly)':
         st.write(f' train 결정계수 : {train_relation_square}, test 결정계수 : {test_relation_square}')
 
         st.subheader('시각화 부분')
-#         SearchBtn2 = st.button('Search')
+        SearchBtn_RF = st.button('Search')
 
-#         if SearchBtn2:
-#             fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
-#             fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
-#             fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',name='Predict')) # mode='lines+markers'
-#             fig.update_layout(title='<b>actual과 predict 비교')
-#             st.plotly_chart(fig)
+        if SearchBtn_RF:
+            fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
+            fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
+            fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',name='Predict')) # mode='lines+markers'
+            fig.update_layout(title='<b>actual과 predict 비교')
+            st.plotly_chart(fig)
 
     #### Tab3
     with tab_XGB:
        st.header("XGBoost")
        st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
-
-        
-        
-    SearchBtn = st.button('Search')
-    
-    if SearchBtn:
-        # Add histogram data
-    #     x0 = np.random.randn(200) - 5
-        x1 = np.random.randn(200) - 2
-        x2 = np.random.randn(200)
-        x3 = np.random.randn(200) + 2
-    #     x4 = np.random.randn(200) + 5
-
-        # Group data together
-        hist_data = [x1, x2, x3]
-
-        group_labels = ['Group 1', 'Group 2', 'Group 3']
-
-        # Create distplot with custom bin_size
-        fig = ff.create_distplot(
-               hist_data, group_labels, bin_size=[.1, .25, .5])
-
-        # Plot!
-        st.plotly_chart(fig, use_container_width=True)
