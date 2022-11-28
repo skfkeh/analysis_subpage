@@ -160,7 +160,7 @@ elif options == '02. 데이터 전처리 과정':
     st.code(code_Route, language='python')
 
     ### 3. Duration 전처리
-    st.header("3. Duration 컬럼을 '시간'과 '분' 단위로 분할 후 Duration 컬럼 drop")
+    st.header("3. Duration 전처리")
     code_Dep = '''#Duration 컬럼을 '시간'과 '분' 단위로 분할
 df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
 df['Duration_hour'] = df.Duration.str.extract('(\d+)h')
