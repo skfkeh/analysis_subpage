@@ -227,8 +227,21 @@ for t in range(len(air_count)):
     st.write('')
     
     
-    #### 5. Total_Stops 전처리
-    st.header("5. Total_Stops 전처리")
+    #### 5. Additional_Info 전처리
+    st.write("5. Additional_Info 전처리")
+    code_addition = '''add_count = df.Additional_Info.value_counts().index
+additional_thing = [l for l in add_count if list(df.Additional_Info).count(l) < 20]
+df.Additional_Info = df.Additional_Info.replace(additional_thing, 'Others')
+
+add_count = df.Additional_Info.value_counts().index
+for t in range(len(add_count)):
+    df.loc[df.Additional_Info == add_count[t], 'Add_col'] = t'''
+    st.code(code_addition, language='python')    
+    df = preprocess_Additional(df)
+
+    
+    #### 6. Total_Stops 전처리
+    st.header("6. Total_Stops 전처리")
     
     code_Stop = '''def handle_stops(x):
     if x == 'non-stop': return 0
@@ -241,8 +254,8 @@ df.Total_Stops = df.Total_Stops.apply(handle_stops)'''
     st.write('')
     
     
-    #### 6. Date_of_Journey 전처리
-    st.header("6. Date_of_Journey 전처리")
+    #### 7. Date_of_Journey 전처리
+    st.header("7. Date_of_Journey 전처리")
     
     code_Date = '''df['Date_of_journey_DT'] = pd.to_datetime(df['Date_of_Journey'])
 df['weekday'] = pd.to_datetime(df['Date_of_journey_DT']).dt.weekday
@@ -253,8 +266,8 @@ df['weekday_name'] = pd.to_datetime(df['Date_of_journey_DT']).dt.day_name()'''
     st.write('')
     
     
-    ### 7. Dep_Time 데이터 전처리
-    st.header("7. Dep_Time 전처리")
+    ### 8. Dep_Time 데이터 전처리
+    st.header("8. Dep_Time 전처리")
     code_Dep = '''df.Dep_Time = df.Dep_Time.astype(str)
 df['Dep_hour'] = df.Dep_Time.str.extract('([0-9]+)\:')
 df.drop(columns=['Dep_Time'],inplace=True)'''
@@ -264,8 +277,8 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     st.write('')
     
     
-    ### 8. 불필요 컬럼 drop
-    st.header("8. 불필요 컬럼 drop")
+    ### 9. 불필요 컬럼 drop
+    st.header("9. 불필요 컬럼 drop")
     st.write('분석에 불필요한 컬럼을 Drop 처리한다.')
     st.subheader('대상')
     col1, col2, col3 = st.columns(3)
@@ -281,8 +294,8 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     st.write('')
     
     
-    ### 9.범주형 변수 처리
-    st.header("9.범주형 변수 처리")
+    ### 10.범주형 변수 처리
+    st.header("10.범주형 변수 처리")
     st.write('정리된 column 중 object로 남아있는 column들을 dummy 처리한다.')
     code_Dummy = "df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'], drop_first=True)"
     st.code(code_Dummy, language='python')
