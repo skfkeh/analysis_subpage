@@ -3,12 +3,18 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-
-import plotly.figure_factory as ff
-# import matplotlib.pyplot as plt 
-
 import time
 from PIL import Image     # 이미지 처리 라이브러리
+
+import matplotlib.pyplot as plt 
+import joblib
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+
+import plotly.figure_factory as ff
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 
 ########### function ###########
