@@ -392,8 +392,8 @@ elif options == '03. 알고리즘 적용':
         s2_col.selectbox('choose max_dpth',[5,9,12,20])
         s3_col.selectbox('choose min_samples_leaf',[5,11,18,22])
         
-        train_pred_rf = model.predict(X_train) 
-        test_pred_rf = model.predict(X_test)
+        train_pred_rf = model_rf.predict(X_train) 
+        test_pred_rf = model_rf.predict(X_test)
 
         predict_button_rf = st.button('예측')
         
