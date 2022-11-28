@@ -108,7 +108,7 @@ def preprocess_Drop(df):
 
 ### 9.범주형 변수 처리
 def preprocess_Dummy(df):
-    df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'],drop_first=True)
+    df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'], drop_first=True)
     return df
     
 ########### function ###########
@@ -284,7 +284,7 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     ### 9.범주형 변수 처리
     st.header("9.범주형 변수 처리")
     st.write('정리된 column 중 object로 남아있는 column들을 dummy 처리한다.')
-    code_Dummy = "df = pd.get_dummies(df,columns=['weekday_name','Add_col','Air_col'],drop_first=True)"
+    code_Dummy = "df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'], drop_first=True)"
     st.code(code_Dummy, language='python')
     st.write('')
     st.markdown('---')
