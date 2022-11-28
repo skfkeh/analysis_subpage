@@ -365,13 +365,18 @@ elif options == '03. 시각화(plotly)':
         s1_col.selectbox('choose n_estimators',[200,500,800,1000])
         s2_col.selectbox('choose max_dpth',[5,9,12,20])
         s3_col.selectbox('choose min_samples_leaf',[5,11,18,22])
-
-        predict_button = st.button('예측')
-        if predict_button:
-            st.write(model.score(X_train, y_train),model.score(X_test, y_test))
-
+        
         train_pred = model.predict(X_train) 
         test_pred = model.predict(X_test)
+
+        predict_button = st.button('예측')
+        
+        if predict_button:
+            st.write(f'Train_set : {model.score(X_train, y_train)}')
+            st.wrtie(f'Test_set : {model.score(X_test, y_test)}')
+            
+            st.wrtie(f'train_pred " {train_pred}')
+            st.wrtie(f'test_pred " {test_pred}')
 
         # 훈련 모델 시각화
         st.subheader('모델 훈련이 잘 되었는지 시각화')
