@@ -135,6 +135,14 @@ if 'choice' not in st.session_state:
 if 'file_name' not in st.session_state:
     st.session_state['file_name'] = ''
     
+
+    
+if 'predict_button_dt' not in st.session_state:
+    st.session_state['predict_button_dt'] = False
+    
+if 'predict_button_rf' not in st.session_state:
+    st.session_state['predict_button_rf'] = False
+    
 ########### session ###########
        
 
