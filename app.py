@@ -268,7 +268,7 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     st.header("8. 불필요 컬럼 drop")
     st.write('분석에 불필요한 컬럼을 Drop 처리한다.')
     st.subheader('대상')
-    col1, col2, col3 = st.columns(2)
+    col1, col2, col3 = st.columns(3)
     
     col1.write('- Date_of_Journey')
     col2.write('- Source')
