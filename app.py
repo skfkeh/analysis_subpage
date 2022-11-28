@@ -322,7 +322,7 @@ elif options == '03. 시각화(plotly)':
     with tab_De:
        col1, col2 = st.columns(2)
 
-       st.header("Logistic")
+       st.header("DecisionTree")
        st.image("https://github.com/skfkeh/newthing/blob/main/img/Patrick.jpeg?raw=true", width=200)
 
        ts_number = col1.slider(label="test_size를 설정해주세요",
