@@ -271,11 +271,11 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     ### 9.범주형 변수 처리
     st.header("9.범주형 변수 처리")
     st.write('정리된 column 중 object로 남아있는 column들을 dummy 처리한다.')
-    code_Dummy = '''df = pd.get_dummies(df,columns=['weekday_name','Add_col','Air_col'],drop_first=True) df.head()'''
+    code_Dummy = "df = pd.get_dummies(df,columns=['weekday_name','Add_col','Air_col'],drop_first=True)"
     st.code(code_Dummy, language='python')
 #    df = preprocess_Dummy(df)
 #    st.dataframe(df)
-    st.wrtie('데이터 전처리 완료')
+#    st.wrtie('데이터 전처리 완료')
     
 elif options == '03. 시각화(plotly)':
     st.write("분석 알고리즘을 골라주세요")
