@@ -207,24 +207,7 @@ elif options == '02. 데이터 전처리 과정':
         df.loc[df.Airline == air_count[t], 'Air_col'] = t
     df.drop(columns=['Airline'],inplace=True)
     
-    #### 5. Additional_Info 전처리
-    st.write("5. Additional_Info 전처리")
-    code_addition = ''' add_count = df.Additional_Info.value_counts().index
-    additional_thing = [l for l in add_count if list(df.Additional_Info).count(l) < 20]
-    df.Additional_Info = df.Additional_Info.replace(additional_thing, 'Others')
 
-    add_count = df.Additional_Info.value_counts().index
-    for t in range(len(add_count)):
-        df.loc[df.Additional_Info == add_count[t], 'Add_col'] = t'''
-    st.code(code_addition, language='python')
-    
-    add_count = df.Additional_Info.value_counts().index
-    additional_thing = [l for l in add_count if list(df.Additional_Info).count(l) < 20]
-    df.Additional_Info = df.Additional_Info.replace(additional_thing, 'Others')
-
-    add_count = df.Additional_Info.value_counts().index
-    for t in range(len(add_count)):
-        df.loc[df.Additional_Info == add_count[t], 'Add_col'] = t
         
     st.dataframe(df(head())
     
