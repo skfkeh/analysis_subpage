@@ -43,7 +43,7 @@ if 'file_name' not in st.session_state:
 
 ########### define ###########
 
-file_name = 'Data_Train.xlsx'
+file_name = 'Data_Train.csv'
 url = f'https://raw.githubusercontent.com/skfkeh/newthing/main/{file_name}'
 
 ########### define ###########
