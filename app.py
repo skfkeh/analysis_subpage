@@ -145,7 +145,7 @@ if options == '01. Home':
     st.write(f"사용한 데이터 URL : {url}")
 
 elif options == '02. 데이터 전처리 과정':
-    df = read_csv(url)
+    df = pd.read_csv(url)
     
     st.write("df.head()")
     st.dataframe(df.head())
