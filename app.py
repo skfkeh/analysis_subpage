@@ -365,12 +365,12 @@ elif options == '03. 알고리즘 적용':
         st.write(f'Test 결정계수 : {test_relation_square_dt}')
         
         st.subheader('시각화 부분')
-        checkBox_dt = st.checkbox('plotly 활성화')
+        SearchBtn_dt = st.button('plotly 활성화')
 
-        if checkBox_dt:
+        if SearchBtn_dt:
             fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
             fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
-            fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',name='Predict')) # mode='lines+markers'
+            fig.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict')) # mode='lines+markers'
             fig.update_layout(title='<b>actual과 predict 비교')
             st.plotly_chart(fig)
         
@@ -416,7 +416,7 @@ elif options == '03. 알고리즘 적용':
             # 시각화 해보기
             fig = make_subplots(rows=1, cols=1, shared_xaxes=True)
             fig.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual'))
-            fig.add_trace(go.Scatter(x=y_test,y=test_pred,mode='markers',
+            fig.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers',
                         name='Predict')) # mode='lines+markers'
             fig.update_layout(title='<b>actual과 predict 비교')
             st.plotly_chart(fig)
