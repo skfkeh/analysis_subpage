@@ -369,9 +369,9 @@ elif options == '03. 알고리즘 적용':
 
         if CheckBox_dt:
             fig_dt = make_subplots(rows=1, cols=1, shared_xaxes=True)
-            fig_dt.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers_dt',name='Actual'))
-            fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers_dt',name='Predict')) # mode='lines+markers'
-            fig_dt.update_layout(title='<b>actual과 predict 비교')
+            fig_dt.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_dt'))
+            fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict_dt')) # mode='lines+markers'
+            fig_dt.update_layout(title='<b>actual과 predict 비교_dt')
             st.plotly_chart(fig_dt)
         
     #### Tab2
@@ -415,10 +415,9 @@ elif options == '03. 알고리즘 적용':
         if CheckBox_rf:
             # 시각화 해보기
             fig_rf = make_subplots(rows=1, cols=1, shared_xaxes=True)
-            fig_rf.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers_rf',name='Actual'))
-            fig_rf.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers_rf',
-                        name='Predict')) # mode='lines+markers'
-            fig_rf.update_layout(title='<b>actual과 predict 비교')
+            fig_rf.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_rf'))
+            fig_rf.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers', name='Predict_rf')) # mode='lines+markers'
+            fig_rf.update_layout(title='<b>actual과 predict 비교_rf')
             st.plotly_chart(fig_rf)
 
     #### Tab3
