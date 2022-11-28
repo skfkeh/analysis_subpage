@@ -370,7 +370,7 @@ elif options == '03. 알고리즘 적용':
         if CheckBox_dt:
             fig_dt = make_subplots(rows=1, cols=1, shared_xaxes=True)
             fig_dt.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_dt'))
-            fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict_dt')) # mode='lines+markers'
+            fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict_dt'))
             fig_dt.update_layout(title='<b>actual과 predict 비교_dt')
             st.plotly_chart(fig_dt)
         
