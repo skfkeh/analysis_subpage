@@ -114,7 +114,14 @@ file_name = 'Data_Train.csv'
 url = f'https://raw.githubusercontent.com/skfkeh/newthing/main/{file_name}'
 
 ########### define ###########
-    
+
+
+
+
+################################
+#####       UI Start       #####
+################################
+
 if st.session_state['chk_balloon'] == False:
     count_down(5)
     with st.spinner(text="Please wait..."):
@@ -122,11 +129,6 @@ if st.session_state['chk_balloon'] == False:
 
     st.balloons()
     st.session_state['chk_balloon'] = True
-
-
-################################
-#####       UI Start       #####
-################################
 
 
 options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 시각화(plotly)'])
@@ -148,9 +150,24 @@ elif options == '02. 데이터 전처리 과정':
     st.image('https://github.com/skfkeh/newthing/blob/main/img/plane_img.png?raw=true')
     df = pd.read_csv(url)
     
-    st.write("1. 확인을 위한 df.head()")
+    st.write("1. df.head()로 데이터 확인")
     st.dataframe(df.head())
     
+    st.write("2. Route Drop 처리")
+    code_Route = 'df.drop('Route', axis=1, inplace=True)'
+    
+    st.write("3. Duration 컬럼을 '시간'과 '분' 단위로 분할 후 Duration 컬럼 drop")
+    code_Dep = '''df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
+    df['Duration_hour'] = df.Duration.str.extract('(\d+)h')
+    df['Duration_min'] = df.Duration.str.extract('(\d+)m').fillna(0)
+    '''
+    st.code(code_Dep, langauge='python')
+    
+    code_airlist = '''airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
+    df.Airline = df.Airline.replace(airlist, 'Others')
+    '''
+    
+    st.code(code_airlist, langauge='python')
     
     pre_data = preprocessing(df)
     
