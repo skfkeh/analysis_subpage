@@ -222,6 +222,8 @@ for t in range(len(air_count)):
     df.loc[df.Airline == air_count[t], 'Air_col'] = t'''
     st.code(code_airline, language='python')
     df = preprocess_Airline(df)
+    
+    st.dataframe(df.head())
     st.write('')
     
     
