@@ -159,19 +159,30 @@ elif options == '02. 데이터 전처리 과정':
     
     st.write("3. Duration 컬럼을 '시간'과 '분' 단위로 분할 후 Duration 컬럼 drop")
     code_Dep = '''df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
+df['Duration_hour'] = df.Duration.str.extract('(\d+)h')
+df['Duration_min'] = df.Duration.str.extract('(\d+)m').fillna(0)
+    
+df.Duration_hour = df.Duration_hour.astype('int64')
+df.Duration_min = df.Duration_min.astype('int64')
+df.Duration_hour = df.Duration_hour*60
+df['Duration_total'] = df.Duration_hour+df.Duration_min'''
+
+    st.code(code_Dep, language='python')    
+    
+    df['Dep_Time'] = pd.to_datetime(df['Dep_Time'], format= '%H:%M').dt.time
     df['Duration_hour'] = df.Duration.str.extract('(\d+)h')
     df['Duration_min'] = df.Duration.str.extract('(\d+)m').fillna(0)
-    
+
     df.Duration_hour = df.Duration_hour.astype('int64')
     df.Duration_min = df.Duration_min.astype('int64')
     df.Duration_hour = df.Duration_hour*60
     df['Duration_total'] = df.Duration_hour+df.Duration_min
-    '''
-    st.code(code_Dep, language='python')    
+    
+    st.dataframe(df.header())
+    
     
     code_airlist = '''airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
-    df.Airline = df.Airline.replace(airlist, 'Others')
-    '''
+df.Airline = df.Airline.replace(airlist, 'Others')'''
     
     st.code(code_airlist, language='python')
     
