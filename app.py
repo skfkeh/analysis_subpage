@@ -373,7 +373,8 @@ elif options == '03. 시각화(plotly)':
         predict_button = st.button('예측')
         
         if predict_button:        
-            st.write(model.score(X_train, y_train), model.score(X_test, y_test))
+            st.write(f'Train-set : {model.score(X_train, y_train)}')
+            st.write(f'Test-set : {model.score(X_test, y_test)}')
 #             df_pred = pd.DataFrame(
 #                 [['Set', model.score(X_train, y_train), model.score(X_test, y_test)],
 #                  ['RMSE', mean_squared_error(y_train, train_pred, squared=False), mean_squared_error(y_test, test_pred)]],
