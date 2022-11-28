@@ -43,8 +43,8 @@ if 'file_name' not in st.session_state:
 
 ########### define ###########
 
-file_name = 'titanic.csv'
-url = f'https://raw.githubusercontent.com/skfkeh/regression/main/data/{file_name}'
+file_name = 'Data_Train.xlsx'
+url = f'https://github.com/skfkeh/MachineLearning/blob/main/Resource/{file_name}'
 
 ########### define ###########
     
