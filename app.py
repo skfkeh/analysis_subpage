@@ -178,7 +178,7 @@ df['Duration_total'] = df.Duration_hour+df.Duration_min'''
     df.Duration_hour = df.Duration_hour*60
     df['Duration_total'] = df.Duration_hour+df.Duration_min
     
-    st.dataframe(df.header())
+    st.dataframe(df.head())
     
     
     code_airlist = '''airlist = [l for l in air_count if list(df.Airline).count(l) < 200]
