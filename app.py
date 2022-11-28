@@ -137,14 +137,14 @@ SearchBtn = st.button('Search')
 
 if SearchBtn:
     # Add histogram data
-    x0 = np.random.randn(200) - 5
+#     x0 = np.random.randn(200) - 5
     x1 = np.random.randn(200) - 2
     x2 = np.random.randn(200)
     x3 = np.random.randn(200) + 2
-    x4 = np.random.randn(200) + 5
+#     x4 = np.random.randn(200) + 5
     
     # Group data together
-    hist_data = [x0, x1, x2, x3, x4]
+    hist_data = [x1, x2, x3]
 
     group_labels = ['Group 1', 'Group 2', 'Group 3']
 
