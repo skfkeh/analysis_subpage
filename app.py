@@ -130,7 +130,7 @@ with tab_XGB:
 #     st.session_state['chk_strline'] = 'XGBoost'
 
 
-# SearchBtn = st.button('Search')
+SearchBtn = st.button('Search')
 
 
 #####
