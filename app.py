@@ -367,14 +367,14 @@ elif options == '03. 알고리즘 적용':
         st.write(f'Test 결정계수 : {test_relation_square_dt}')
         
         st.subheader('시각화 부분')
-        CheckBox_dt = st.checkbox('plotly 활성화')
+#         CheckBox_dt = st.checkbox('plotly 활성화')
 
-        if CheckBox_dt:
-            fig_dt = make_subplots(rows=1, cols=1, shared_xaxes=True)
-            fig_dt.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_dt'))
-            fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict_dt'))
-            fig_dt.update_layout(title='<b>actual과 predict 비교_dt')
-            st.plotly_chart(fig_dt, key = keys[0])
+#         if CheckBox_dt:
+        fig_dt = make_subplots(rows=1, cols=1, shared_xaxes=True)
+        fig_dt.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_dt'))
+        fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict_dt'))
+        fig_dt.update_layout(title='<b>actual과 predict 비교_dt')
+        st.plotly_chart(fig_dt, key = keys[0])
         
     #### Tab2
     with tab_RF:
@@ -412,15 +412,15 @@ elif options == '03. 알고리즘 적용':
         st.write(f'test 결정계수 : {test_relation_square_rf}')
 
         st.subheader('시각화 부분')
-        CheckBox_rf = st.checkbox('plotly 활성화')
+#         CheckBox_rf = st.checkbox('plotly 활성화')
 
-        if CheckBox_rf:
+#         if CheckBox_rf:
             # 시각화 해보기
-            fig_rf = make_subplots(rows=1, cols=1, shared_xaxes=True)
-            fig_rf.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_rf'))
-            fig_rf.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers', name='Predict_rf')) # mode='lines+markers'
-            fig_rf.update_layout(title='<b>actual과 predict 비교_rf')
-            st.plotly_chart(fig_rf, key = keys[1])
+        fig_rf = make_subplots(rows=1, cols=1, shared_xaxes=True)
+        fig_rf.add_trace(go.Scatter(x=y_train,y=y_test, mode='markers',name='Actual_rf'))
+        fig_rf.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers', name='Predict_rf')) # mode='lines+markers'
+        fig_rf.update_layout(title='<b>actual과 predict 비교_rf')
+        st.plotly_chart(fig_rf, key = keys[1])
 
     #### Tab3
     with tab_XGB:
