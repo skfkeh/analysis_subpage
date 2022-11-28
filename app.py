@@ -377,16 +377,16 @@ elif options == '03. 시각화(plotly)':
             col1.write(f'Train_set : {model.score(X_train, y_train)}')
             col2.write(f'Test_set : {model.score(X_test, y_test)}')
             
-            col1, col2, col3, col4 = st.columns(4)
-            col1.write('train_pred')
-#            st.dataframe(train_pred)
-            col3.write('test_pred')
-#            st.dataframe(test_pred)
+            st.markdown('||train|test|')
+            st.markdown('---')
+            st.markdown(f'|rmse|{mean_squared_error(y_train, train_pred, squared=False)}|{mean_squared_error(y_test, test_pred)}|')
             
-            col1.write('train_rmse')
-            col2.write(mean_squared_error(y_train, train_pred, squared=False))
-            col3.write('test_rmse')
-            col4.write(mean_squared_error(y_test, test_pred))
+#             col1, col2, col3, col4 = st.columns(4)
+#             col1.write('train_pred')
+# #            st.dataframe(train_pred)
+#             col3.write('test_pred')
+# #            st.dataframe(test_pred)
+            
             
             
 
