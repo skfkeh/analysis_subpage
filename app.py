@@ -108,7 +108,7 @@ def preprocess_Drop(df):
 
 ### 9.범주형 변수 처리
 def preprocess_Dummy(df):
-    df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'], drop_first=True)
+    df = pd.get_dummies(df, columns=['weekday_name','Add_col','Air_col'],drop_first=True)
     return df
     
 ########### function ###########
@@ -268,14 +268,14 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     st.header("8. 불필요 컬럼 drop")
     st.write('분석에 불필요한 컬럼을 Drop 처리한다.')
     st.subheader('대상')
-    col1, col2 = st.columns(2)
+    col1, col2, col3 = st.columns(2)
     
     col1.write('- Date_of_Journey')
     col2.write('- Source')
-    col1.write('- Destination')
-    col2.write('- Date_of_journey_DT')
-    col1.write('- Additional_Info')
-    col2.write('- weekday')
+    col3.write('- Destination')
+    col1.write('- Date_of_journey_DT')
+    col2.write('- Additional_Info')
+    col3.write('- weekday')
     df = preprocess_Drop(df)
     st.dataframe(df.head())
     st.write('')
@@ -286,6 +286,7 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     st.write('정리된 column 중 object로 남아있는 column들을 dummy 처리한다.')
     code_Dummy = "df = pd.get_dummies(df,columns=['weekday_name','Add_col','Air_col'],drop_first=True)"
     st.code(code_Dummy, language='python')
+    
     df = preprocess_Dummy(df)
     st.write('')
     st.write('')
