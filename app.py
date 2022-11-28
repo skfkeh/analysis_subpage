@@ -276,7 +276,6 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     col1.write('- Additional_Info')
     col2.write('- weekday')
     df = preprocess_Drop(df)
-    st.dataframe(df.head()) 
     st.write('')
     
     
