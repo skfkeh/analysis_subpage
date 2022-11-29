@@ -158,15 +158,16 @@ keys = random.sample(range(1000, 9999), 3)
 #####       UI Start       #####
 ################################
 
-#if st.session_state['chk_balloon'] == False:
+# if st.session_state['chk_balloon'] == False:
 #    count_down(5)
 #    with st.spinner(text="Please wait..."):
 #        time.sleep(1)
 
-#    st.balloons()
-#    st.session_state['chk_balloon'] = True
+st.balloons()
+#     st.snow()
+#     st.session_state['chk_balloon'] = True
 
-
+    
 options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 알고리즘 적용', '04. 우수 모델 선정', '05. Error!!'])
 
 # if uploaded_file:
@@ -545,7 +546,18 @@ df.Duration_min = df.Duration_min.astype('int64')'''
     st.write('해결책 : train 데이터 자체에서 훈련셋/시험셋을 구분')
     st.markdown('---')
     
-    st.subheader('3. 각 알고리즘 합치기')
+    st.subheader('3. session error')
+    st.write('button 혹은 tab 전환 등의 이벤트가 발생 시마다')
+    st.write('streamlit 전체 소스가 재실행되어 balloon 함수가 반복 실행되었음')
+#     st.image('')
+        
+    st.write('해결책 : streamlit에서 지원하는 session 함수가 존재했으며')
+    st.write('   화면이 재실행되어도 이전 session의 값을 가져와 function이 재실행되는 것을 막을수 있었다')
+    code_session = '''if 'chk_balloon' not in st.session_state:
+    st.session_state['chk_balloon'] = False'''
+    st.code(code_session, language='python')
+    
+    st.subheader('4. 각 알고리즘 합치기')
     st.write('각 알고리즘의 key 값이 충돌해서 plotly 그래프가 그려지지 않는 문제 발생')
     st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/merge%20algorithm_key%20error.png?raw=true', caption="streamlit error 화면")
     st.write('해결책 : 각 알고리즘의 고유 변수명으로 변경 및 key값 부여')
@@ -553,7 +565,7 @@ df.Duration_min = df.Duration_min.astype('int64')'''
     st.code(code_merge_error, language='python')
     st.markdown('---')
     
-    st.subheader('4. streamlit - xgboost')
+    st.subheader('5. streamlit - xgboost')
     st.write('streamlit에서 xgboost 모델이 없다는 오류 발생')
     st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/xgb_error.png?raw=true', caption="streamlit_xgboost_error")
     st.write('해결책 : ')
