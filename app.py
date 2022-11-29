@@ -158,14 +158,14 @@ keys = random.sample(range(1000, 9999), 3)
 #####       UI Start       #####
 ################################
 
-# if st.session_state['chk_balloon'] == False:
+if st.session_state['chk_balloon'] == False:
 #    count_down(5)
 #    with st.spinner(text="Please wait..."):
 #        time.sleep(1)
 
-st.balloons()
-#     st.snow()
-#     st.session_state['chk_balloon'] = True
+    st.balloons()
+    st.snow()
+    st.session_state['chk_balloon'] = True
 
     
 options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 알고리즘 적용', '04. 우수 모델 선정', '05. Error!!'])
