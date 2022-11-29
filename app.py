@@ -166,8 +166,11 @@ if st.session_state['chk_balloon'] == False:
     st.balloons()
     st.session_state['chk_balloon'] = True
 
-    
+st.sidebar.subheader('Menu')
 options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 알고리즘 적용', '04. 우수 모델 선정', '05. Error!!'])
+
+# st.sidebar.image
+
 
 # if uploaded_file:
 #    df = pd.read_excel(url)
