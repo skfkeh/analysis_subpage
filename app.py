@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import os
 import time
+import graphviz
 from PIL import Image     # 이미지 처리 라이브러리
 
 import matplotlib.pyplot as plt 
@@ -133,12 +134,22 @@ if 'choice' not in st.session_state:
 
 if 'file_name' not in st.session_state:
     st.session_state['file_name'] = ''
+
+    
+# if 'rmse_train_dt' not in st.session_state:
+#     st.session_state['rmse_train_dt'] = 0
+# if 'rmse_test_dt' not in st.session_state:
+#     st.session_state['rmse_test_dt'] = 0
+# if 'rmse_train_rf' not in st.session_state:
+#     st.session_state['rmse_train_rf'] = 0
+# if 'rmse_test_rf' not in st.session_state:
+#     st.session_state['rmse_test_rf'] = 0
 ########### session ###########
        
 
 ########### define ###########
 file_name = 'Data_Train.csv'
-url = f'https://raw.githubusercontent.com/skfkeh/newthing/main/{file_name}'
+url = f'https://raw.githubusercontent.com/skfkeh/MachineLearning/main/Resource/{file_name}'
 keys = random.sample(range(1000, 9999), 3)
 ########### define ###########
 
@@ -156,7 +167,7 @@ keys = random.sample(range(1000, 9999), 3)
 #    st.session_state['chk_balloon'] = True
 
 
-options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 알고리즘 적용', '04. 우수 모델 선정'])
+options = st.sidebar.radio('Why is my airfare expensive?!', options=['01. Home','02. 데이터 전처리 과정','03. 알고리즘 적용', '04. 우수 모델 선정', '05. Error!!'])
 
 # if uploaded_file:
 #    df = pd.read_excel(url)
@@ -313,7 +324,7 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
     df = preprocess_Dummy(df)
     st.dataframe(df.head())
     
-    st.image('https://github.com/skfkeh/newthing/blob/main/img/plane_landing.png?raw=true')
+    st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/plane_landing.png?raw=true')
 
     
 ################################
@@ -322,6 +333,23 @@ df.drop(columns=['Dep_Time'],inplace=True)'''
 elif options == '03. 알고리즘 적용':
     st.title("분석 알고리즘에 따른 predict 값 ")
 
+    st.subheader('Heatmap 기반으로 column 값이 가장 관련 있는지 확인')
+    visible_cb = st.checkbox('분석 정보')
+    st.write('''
+    
+    
+    
+    ''')
+    if visible_cb:
+        st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/flight_heatmap.jpg?raw=true', caption='Price값은 Duration_total column과 가장 관련이 깊었다.')
+        st.write('위 정보를 기반으로 각 알고리즘에 맞춰 분석해보자.')
+        st.write('사용된 분석 알고리즘')
+        st.write('- Decision Tree')
+        st.write('- RandomForest')
+        st.write('- XGBoost')
+    st.markdown('---')
+    
+    
     tab_DT, tab_RF, tab_XGB = st.tabs(["DecisionTree", "RandomForest", "XGBoost"])
 
     data_path = f"{os.path.dirname(os.path.abspath(__file__))}/data.csv"
@@ -356,13 +384,16 @@ elif options == '03. 알고리즘 적용':
         # 훈련 모델 시각화
         st.subheader('모델 훈련이 잘 되었는지 시각화')
         r1_col, r2_col = st.columns(2)
-        r1_col.image('https://github.com/skfkeh/newthing/blob/main/img/first_pred_dt.png?raw=true',caption='초기 파라미터 값 그래프')
-        r2_col.image('https://github.com/skfkeh/newthing/blob/main/img/optim_pred_dt.png?raw=true',caption='최적의 파라미터 적용 그래프')
+        r1_col.image('https://github.com/skfkeh/MachineLearning/blob/main/img/first_pred_dt.png?raw=true',caption='초기 파라미터 값 그래프')
+        r2_col.image('https://github.com/skfkeh/MachineLearning/blob/main/img/optim_pred_dt.png?raw=true',caption='최적의 파라미터 적용 그래프')
 
         # 기본값일 때 결정계수
         st.subheader('RMSE 비교')
         train_relation_square_dt = model_dt.score(X_train, y_train)
+#         st.session_state['rmse_train_dt'] = model_dt.score(X_train, y_train)
         test_relation_square_dt = model_dt.score(X_test, y_test)
+#         st.session_state['rmse_test_dt'] = model_dt.score(X_test, y_test)
+        
         st.write(f'Train 결정계수 : {train_relation_square_dt}')
         st.write(f'Test 결정계수 : {test_relation_square_dt}')
         
@@ -376,6 +407,9 @@ elif options == '03. 알고리즘 적용':
         fig_dt.add_trace(go.Scatter(x=y_test, y=test_pred_dt, mode='markers',name='Predict_dt'))
         fig_dt.update_layout(title='<b>actual과 predict 비교_dt')
         st.plotly_chart(fig_dt, key = keys[0])
+
+        st.subheader('Decision Tree')
+        st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/dt_graph.png?raw=true')
         
     #### Tab2
     with tab_RF:
@@ -403,12 +437,14 @@ elif options == '03. 알고리즘 적용':
         # 훈련 모델 시각화
         st.subheader('모델 훈련이 잘 되었는지 시각화')
         r1_col, r2_col = st.columns(2)
-        r1_col.image('https://github.com/skfkeh/newthing/blob/main/img/first_pred_rf.png?raw=true',caption='초기 파라미터 값 그래프')
-        r2_col.image('https://github.com/skfkeh/newthing/blob/main/img/optim_pred_rf.png?raw=true',caption='최적의 파라미터 적용 그래프')
+        r1_col.image('https://github.com/skfkeh/MachineLearning/blob/main/img/first_pred_rf.png?raw=true',caption='초기 파라미터 값 그래프')
+        r2_col.image('https://github.com/skfkeh/MachineLearning/blob/main/img/optim_pred_rf.png?raw=true',caption='최적의 파라미터 적용 그래프')
 
         st.subheader('RMSE 비교') 
         train_relation_square_rf = mean_squared_error(y_train, train_pred_rf, squared=False)
+#         st.session_state['rmse_train_rf'] = mean_squared_error(y_train, train_pred_rf, squared=False)
         test_relation_square_rf = mean_squared_error(y_test, test_pred_rf) ** 0.5
+#         st.session_state['rmse_test_rf'] = mean_squared_error(y_test, test_pred_rf) ** 0.5
         st.write(f'train 결정계수 : {train_relation_square_rf}')
         st.write(f'test 결정계수 : {test_relation_square_rf}')
 
@@ -422,12 +458,105 @@ elif options == '03. 알고리즘 적용':
         fig_rf.add_trace(go.Scatter(x=y_test, y=test_pred_rf, mode='markers', name='Predict_rf')) # mode='lines+markers'
         fig_rf.update_layout(title='<b>actual과 predict 비교_rf')
         st.plotly_chart(fig_rf, key = keys[1])
+        
 
     #### Tab3
     with tab_XGB:
-       st.header("XGBoost")
-       st.image("https://static.streamlit.io/examples/owl.jpg", width=200)
+        st.header("XGBoost")
         
+        st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/emergency.jpeg?raw=true', caption='모듈의 버전차이로 인해 다른 화면에서 추가 설명')
+        # score 와 mse 비교
+#         model_pkl_path_xg = f"{os.path.dirname(os.path.abspath(__file__))}/XGBoost_02.pkl"
+#         model_xg = joblib.load(model_pkl_path_xg)
+        
+#         # 파라미터 변경해가며 예측
+#         st.subheader('예측하기')
+#         train_pred_xg = model_xg.predict(X_train)
+#         test_pred_xg = model_xg.predict(X_test)
+#         st.write(f'Train-set : {model_xg.score(X_train, y_train)}')
+#         st.write(f'Test-set : {model_xg.score(X_test, y_test)}')
+        
+#         # 훈련 모델 시각화
+#         st.subheader('모델 훈련이 잘 되었는지 시각화')
+#         r1_col, r2_col = st.columns(2)
+#         r1_col.image('https://github.com/skfkeh/MachineLearning/blob/main/img/first_pred_xgb.png?raw=true',caption='초기 파라미터 값 그래프')
+#         r2_col.image('https://github.com/skfkeh/MachineLearning/blob/main/img/optim_pred_xgb.png?raw=true',caption='최적의 파라미터 적용 그래프')
+        
+#         # 기본값일 때 결정계수
+#         st.subheader('RMSE 비교')
+#         train_relation_square_xg = model_xg.score(X_train, y_train)
+#         test_relation_square_xg = model_xg.score(X_test, y_test)
+#         st.write(f'Train 결정계수 : {train_relation_square_xg}')
+#         st.write(f'Test 결정계수 : {test_relation_square_xg}')
+        
+#         st.subheader('시각화 부분')
+#         # CheckBox_dt = st.checkbox('plotly 활성화')
+# #         if CheckBox_dt:
+#         # 시각화 해보기
+#         fig_xg = make_subplots(rows = 1, cols = 1, shared_xaxes = True)
+#         fig_xg.add_trace(go.Scatter(x = y_train, y = y_test, mode = 'markers', name = 'Actual_xg'))
+#         fig_xg.add_trace(go.Scatter(x = y_test, y = test_pred_xg, mode = 'markers', name = 'Predict_xg'))
+#         fig_xg.update_layout(title = '<b>actual과 predict 비교_xg')
+#         st.plotly_chart(fig_xg, key = keys[2])
         
 elif options == '04. 우수 모델 선정':
     st.title('우수 모델')
+
+    st.subheader('각 알고리즘의 Train/Test RMSE 간격 차이')    
+    
+    rmse_dt = pd.DataFrame(
+        [['DecisionTree', '2707.9318335945104', '2808.279093924912', 2808.279093924912 - 2707.9318335945104],
+         ['RandomForest', '2689.0929933761795', '2743.3126679067127', 2743.3126679067127 - 2689.0929933761795],
+         ['XGBoost', '1303.7460823618917', '2654.185010859511', 2654.185010859511 - 1303.7460823618917]],
+        columns=['', 'Train', 'Test', 'Train과 Test 간의 차이']
+    )
+    
+    # CSS to inject contained in a string
+    hide_table_row_index = """
+                <style>
+                thead tr th:first-child {display:none}
+                tbody th {display:none}
+                </style>
+                """
+
+    # Inject CSS with Markdown
+    st.markdown(hide_table_row_index, unsafe_allow_html=True)
+    
+    st.table(rmse_dt)
+    
+    st.success('XGBoost의 간격이 가장 크므로 가장 효율적이라고 할 수 있다.', icon="✅")
+#     st.write('XGBoost의 간격이 가장 크므로 가장 효율적이라고 할 수 있다.')
+    
+elif options == '05. Error!!':
+    st.title('이게 참 어려웠지~(아련)')
+    
+    st.subheader('1. 데이터 전처리 - Duration')
+    st.write('Duration_hour가 데이트 타임 형식으로 변환이 안 되는 오류 발생')
+    st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/duration_error_.PNG?raw=true', caption="Duration_hour error")
+    st.write('해결책 : 시간과 분을 int형으로 바꿔주고 시간을 분으로 환산해서 Duration_total 컬럼 생성')
+    code_duration = '''df.Duration_hour = df.Duration_hour.astype('int64')
+df.Duration_min = df.Duration_min.astype('int64')'''
+    st.code(code_duration, language='python')
+    st.markdown('---')
+    
+    st.subheader('2. 훈련셋/시험셋')
+    st.write('test 파일에 종속변수인 Price컬럼이 비어있어서(NaN) 데이터 전처리 불가능')
+    st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/train_test_error.PNG?raw=true', caption="test_file_NaN")
+    st.write('해결책 : train 데이터 자체에서 훈련셋/시험셋을 구분')
+    st.markdown('---')
+    
+    st.subheader('3. 각 알고리즘 합치기')
+    st.write('각 알고리즘의 key 값이 충돌해서 plotly 그래프가 그려지지 않는 문제 발생')
+    st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/merge%20algorithm_key%20error.png?raw=true', caption="streamlit error 화면")
+    st.write('해결책 : 각 알고리즘의 고유 변수명으로 변경 및 key값 부여')
+    code_merge_error = '''keys = random.sample(range(1000, 9999), 3)'''
+    st.code(code_merge_error, language='python')
+    st.markdown('---')
+    
+    st.subheader('4. streamlit - xgboost')
+    st.write('streamlit에서 xgboost 모델이 없다는 오류 발생')
+    st.image('https://github.com/skfkeh/MachineLearning/blob/main/img/xgb_error.png?raw=true', caption="streamlit_xgboost_error")
+    st.write('해결책 : ')
+
+    
+    
