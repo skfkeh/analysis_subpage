@@ -162,9 +162,8 @@ if st.session_state['chk_balloon'] == False:
 #    count_down(5)
 #    with st.spinner(text="Please wait..."):
 #        time.sleep(1)
-
-    st.balloons()
     st.snow()
+    st.balloons()
     st.session_state['chk_balloon'] = True
 
     
